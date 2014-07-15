@@ -6,4 +6,5 @@ composer.phar
 /web/css
 /web/js
 fabfile.pyc
+/var/
 
