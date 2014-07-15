@@ -1,0 +1,40 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}albums{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">Liste des albums</h2>
+    		{% if collection is defined %}<h3 class="text-center"><small>{{ collection.title }}</small></h3>{% endif %}
+    		<hr/>
+  		</div>
+  		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Titre</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th># photos</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for album in albums %}
+					<tr>
+						<td>{{ album.id }}</td>
+						<td>{{ album.title }}</td>
+						<td>{{ album.description }}</td>
+						<td><img src="{{ album.image }}"></td>
+						<td>{{ album.count_picture }}</td>
+						<td>
+							<div class="medium secondary btn"><a href="/admin/albums/{{ album.id }}/">Modifier</a></div>
+							<div class="medium default btn"><a href="/admin/albums/{{ album.id }}/photos/">Photos</a></div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

@@ -7,30 +7,29 @@ date_default_timezone_set('Europe/Paris');
 
 // Twig cache
 $app['twig.path'] = array(__DIR__.'/../templates');
-$app['twig.options'] = array('cache' => __DIR__.'/../var/cache/twig');
+$app['twig.cache'] = __DIR__.'/../var/cache/twig';
 
 // Emails.
-$app['admin_email'] = '';
-$app['site_email'] = '';
+$app['email'] = 'contact@jimmyphimmasone.fr';
 
 // Doctrine (db)
 $app['db.options'] = array(
     'driver'   => 'pdo_mysql',
     'host'     => '127.0.0.1',
-    'port'     => '',
+    'port'     => null,
     'dbname'   => 'jimmyphimmasone',
     'user'     => 'root',
     'password' => '123',
 );
 
-// SwiftMailer
-// See http://silex.sensiolabs.org/doc/providers/swiftmailer.html
-$app['swiftmailer.options'] = array(
-    'host' => 'host',
-    'port' => '25',
-    'username' => 'username',
-    'password' => 'password',
-    'encryption' => null,
-    'auth_mode' => null
+// Security
+$app['security.firewalls'] = array(
+    'admin' => array(
+        'pattern' => '^/admin',
+        'http' => true,
+        'users' => array(
+            // raw password is foo
+            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+        ),
+    ),
 );
-

@@ -1,13 +1,196 @@
 {% extends "layout.html" %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Jimmy Phimmasone{% endblock %}
+
+{% block index %}
+<section class="active">
+
+	<article class="panel" style="height: 700px; background: url(/img/backgrounds/{{ background }}) no-repeat center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;" full-screen>
+
+		<div class="row">
+			<div data-scroll-reveal='enter from top over 1.66s' class="centered three columns text-center" style="padding:30% 0px 0px 0px;">
+				<h2 class="title-logo" id="title">Jimmy Phimmasone</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="centered twelve columns text-center">
+				<nav class="cl-effect-21 unfixed" gumby-fixed="top">
+				    <a href="#gallery" class="skip" gumby-update gumby-goto="[data-target='gallery']">Galerie</a>
+				    <a href="#albums" class="skip" gumby-update gumby-goto="[data-target='albums']">Albums</a>
+				    <a href="#about-me" class="skip" gumby-update gumby-goto="[data-target='about-me']">À propos</a>
+				    <a href="#contact" class="skip" gumby-update gumby-goto="[data-target='contact']">Contact</a>
+				</nav>
+			</div>
+		</div>
+
+	</article>
+	
+</section>
+{% endblock %}
 
 {% block content %}
-    <div class="row">
-		  <div class="centered twelve columns">
-		    <p>12 columns {{ teest }}</p>
-		    <p>HomePAGE</p>
-		  </div>
+<section>
+
+	<!-- GALLERY -->
+	<article class="article" data-target="gallery" id="gallery">
+		<div class="row">
+			<div data-scroll-reveal='enter from top over 1.66s' class="centered three columns text-center article-title">
+				<h2 class="title text-center">GALERIE</h2>
+			</div>
+
+			<div data-scroll-reveal='enter from bottom over 1.66s' class="centered six columns text-center">
+				<h4>Des photos à voir ou à revoir ...</h4>
+				<hr/>
+			</div>
+
+			<div class="twelve columns text-center">
+				<ul class="grid cs-style-3">
+					{% for photo in photos %}
+						<li>
+							<figure>
+								<a href="/albums/{{ photo.album_id }}/">
+									<img src="{{ photo.images.small }}" alt="{{ photo.title }}">
+									<figcaption>
+										<p class="text-center">{{ photo.title }}</p>
+									</figcaption>
+								</a>
+							</figure>
+						</li>
+					{% endfor %}
+				</ul>
+	  		</div>
+	  	</div>
+	</article>
+
+<hr/>
+
+	<!-- ALBUMS -->
+	<article style="height: auto; padding:7% 0px 7% 0px" data-target="albums" id="albums">
+		<div class="row">
+			<div data-scroll-reveal='enter from top over 1.66s' class="centered three columns text-center article-title">
+				<h2 class="title text-center" >ALBUMS</h2>
+			</div>
+
+			<div data-scroll-reveal='enter from bottom over 1.66s' class="centered six columns text-center">
+				<h4>Différents albums photos</h4>
+				<hr/>
+			</div>
+
+			<section class="centered twelve columns">
+				{% for collection in collections %}
+					<article class="valign row {% if loop.index is odd %}text-left{% else %}text-right{% endif %}" id="collection">
+					{% if loop.index is odd %}
+						<div id="collection-img-div">
+							<a id="collection-link" data-collection-id={{ collection.id }}>
+								<img id="collection-image-{{ collection.id }}" data-scroll-reveal='enter from left over 1s' src="{{ collection.image}}" >
+							</a>
+						</div>
+						<div width="145">
+							<a id="collection-link-text" data-collection-id={{ collection.id }}><h4 data-scroll-reveal='enter from right over 1s'>{{ collection.title}}</h4></a>
+							<p data-scroll-reveal='enter from right over 1s'>{{ collection.description}}</p>
+						</div>
+					{% else %}
+						<div width="145">
+							<a id="collection-link-text" data-collection-id={{ collection.id }}><h4 data-scroll-reveal='enter from left over 1s'>{{ collection.title}}</h4></a>
+							<p data-scroll-reveal='enter from left over 1s'>{{ collection.description}}</p>
+						</div>
+						<div id="collection-img-div">
+							<a id="collection-link" data-collection-id={{ collection.id }}>
+								<img id="collection-image-{{ collection.id }}" data-scroll-reveal='enter from right over 1s' src="{{ collection.image}}" >
+							</a>
+						</div>
+					{% endif %}
+				</article>
+				{% endfor %}
+			</section>
 		</div>
-		<div class="medium primary btn"><a href="#">Primary</a></div>
+	</article>
+
+<hr/>
+	
+	<!-- ABOUT ME -->
+	<article style="height: auto; padding:7% 0px 7% 0px" data-target="about-me" id="about-me">
+		<div class="row">
+			<div data-scroll-reveal='enter from top over 1.66s' class="centered three columns text-center article-title">
+				<h2 class="title text-center">À PROPOS</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="centered twelve columns text-center">
+				<img src='/img/favicon.png' />
+				<h3>Développeur Web</h3>
+	  		</div>
+		</div>
+
+		<div class="row">
+			<div class="centered twelve columns text-center">
+				<nav>
+				    <a href="https://www.facebook.com/jimmy.phimmasone" >
+				    	<svg version="1.1" id="Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="-14 -14 48 48" enable-background="new -14 -14 48 48" xml:space="preserve">
+					    	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="90.0527" y1="-99.7603" x2="90.0527" y2="-106.3809" gradientTransform="matrix(7.2338 0 0 -7.2338 -641.4998 -735.5619)"><stop  offset="0" style="stop-color:#4B71B8"/><stop  offset="1" style="stop-color:#293F7E"/></linearGradient>
+							<path fill="url(#SVGID_1_)" d="M33.931,27.993c0,3.304-2.689,5.983-6.002,5.983H-8.082c-3.315,0-6.001-2.683-6.001-5.983V-7.928
+		c0-3.308,2.687-5.988,6.001-5.988h36.011c3.312,0,6.002,2.681,6.002,5.988V27.993z"/>
+							<path fill="#FFFFFF" d="M25.613-4.557c0,0-3.707,0-6.166,0c-3.662,0-7.732,1.535-7.732,6.835c0.019,1.845,0,3.613,0,5.603H7.481
+							v6.728h4.366v19.37h8.021V14.48h5.295l0.479-6.618h-5.913c0,0,0.016-2.946,0-3.8c0-2.093,2.184-1.974,2.312-1.974
+							c1.042,0,3.059,0.003,3.578,0v-6.646H25.613z"/>
+						</svg>
+				    </a>
+				    <a href="https://twitter.com/WhatsMyNem">
+				    	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Icon" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve">
+							<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="23.9995" y1="0" x2="23.9995" y2="48.0005">
+								<stop offset="0" style="stop-color:#4BD0EF"/>
+								<stop offset="1" style="stop-color:#29AAE1"/>
+							</linearGradient>
+							<path fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_1_)" d="M48,42c0,3.313-2.687,6-6,6H6c-3.313,0-6-2.687-6-6V6  c0-3.313,2.687-6,6-6h36c3.313,0,6,2.687,6,6V42z"/>
+							<path fill="#29AAE1" d="M40.231,13.413c-1.12,0.497-2.323,0.833-3.588,0.984c1.291-0.774,2.28-1.998,2.747-3.457  c-1.206,0.716-2.543,1.236-3.968,1.516c-1.139-1.214-2.763-1.972-4.56-1.972c-3.449,0-6.246,2.796-6.246,6.247  c0,0.49,0.055,0.966,0.161,1.424c-5.192-0.261-9.795-2.749-12.876-6.528c-0.538,0.923-0.846,1.996-0.846,3.141  c0,2.167,1.103,4.08,2.779,5.199c-1.024-0.032-1.987-0.313-2.83-0.781c0,0.026,0,0.053,0,0.079c0,3.026,2.153,5.551,5.011,6.125  c-0.525,0.143-1.076,0.219-1.646,0.219c-0.403,0-0.794-0.038-1.176-0.11c0.795,2.48,3.102,4.287,5.835,4.338  c-2.138,1.675-4.832,2.675-7.758,2.675c-0.504,0-1.002-0.03-1.491-0.089c2.765,1.773,6.048,2.808,9.576,2.808  c11.49,0,17.774-9.519,17.774-17.774c0-0.271-0.006-0.54-0.019-0.809C38.334,15.766,39.394,14.666,40.231,13.413z"/>
+							<path fill="#FFFFFF" d="M40.231,14.739c-1.12,0.497-2.323,0.833-3.588,0.984c1.291-0.773,2.28-1.998,2.747-3.456  c-1.206,0.716-2.543,1.236-3.968,1.516c-1.139-1.214-2.763-1.972-4.56-1.972c-3.449,0-6.246,2.796-6.246,6.247  c0,0.489,0.055,0.966,0.161,1.424c-5.192-0.261-9.795-2.748-12.876-6.527c-0.538,0.923-0.846,1.996-0.846,3.141  c0,2.167,1.103,4.079,2.779,5.199c-1.024-0.032-1.987-0.313-2.83-0.781c0,0.026,0,0.052,0,0.079c0,3.027,2.153,5.551,5.011,6.125  c-0.525,0.144-1.076,0.219-1.646,0.219c-0.403,0-0.794-0.038-1.176-0.11c0.795,2.481,3.102,4.287,5.835,4.338  c-2.138,1.676-4.832,2.675-7.758,2.675c-0.504,0-1.002-0.03-1.491-0.089c2.765,1.773,6.048,2.808,9.576,2.808  c11.49,0,17.774-9.519,17.774-17.774c0-0.271-0.006-0.54-0.019-0.808C38.334,17.092,39.394,15.992,40.231,14.739z"/>
+							</svg>
+				    </a>
+				</nav>
+	  		</div>
+		</div>
+	</article>
+
+<hr/>
+	
+	<!-- CONTACT -->
+	<article style="height: auto; padding:7% 0px 0px 0px" data-target="contact" id="contact">
+		<div class="row">
+			<div data-scroll-reveal='enter from top over 1.66s' class="centered three columns text-center article-title">
+				<h2 class="title text-center">CONTACT</h2>
+			</div>
+			<div class="centered ten columns text-center" data-target="contact">
+				<form id="send-form">
+					<fieldset>
+						<legend>Contact</legend>
+						<ul>
+							<li class="prepend field">
+					     		<span class="adjoined">@</span>
+					    		<input class="wide text input" name="email" id="email" type="text" placeholder="Adresse Email" />
+					    	</li>
+
+					    	<li class="prepend field">
+					    		<input class="wide text input" name="subject" id="subject" type="text" placeholder="Sujet" />
+					    	</li>
+
+						    <li class="field">
+						    	<textarea name="message" id="message" class="xwide input textarea" rows="5" placeholder="Message"></textarea>
+						    </li>
+
+						    <li class="field">
+						    	<div class="medium success btn"><a href="#contact" id="send-email">Envoyer</a></div>
+						    </li>
+
+					  </ul>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</article>
+
+</section>
+
 {% endblock %}
+

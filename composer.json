@@ -1,6 +1,6 @@
 {
-    "name": "fabpot/silex-skeleton",
-    "description": "A pre-configured skeleton for the Silex microframework",
+    "name": "hitsugaya95/myWebsite",
+    "description": "My website",
     "license": "MIT",
     "type": "project",
     "require": {
@@ -20,14 +20,12 @@
         "symfony/security": "~2.3",
         "symfony/translation": "~2.3",
         "symfony/twig-bridge": "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "swiftmailer/swiftmailer": "5.0.*",
+        "doctrine/dbal": "2.2.*",
+        "symfony/serializer": "2.*"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1.x-dev"
-        }
+        "psr-0": { "": "src/backend/" }
     }
 }

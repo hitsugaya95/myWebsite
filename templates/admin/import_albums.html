@@ -1,0 +1,23 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Import albums{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">Importation des albums</h2>
+    		<hr/>
+  		</div>
+
+  		<div class="centered ten columns text-center">
+	  		<p>Ajout : {% if import.add is not empty %} {{ import.add|length }} {% else %}0{% endif %}</p>
+	  		{% if import.add is not empty %}
+		    	<ul>
+		    		{% for add in import.add %}
+		    			<li>{{ add }}</li>
+		    		{% endfor %}
+		    	</ul>
+		    {% endif %}
+	    </div>
+	</div>
+{% endblock %}

@@ -15,8 +15,6 @@ local_dir = os.getcwd()
 def _requirements():
     puts('❯ Checking app requirements...')
 
-    local('mkdir -p cache log')
-
     with hide('running', 'output'):
         if not os.path.isfile("%s/composer.phar" % (local_dir)):
             local('wget -nc -nv -q http://getcomposer.org/composer.phar')
@@ -29,7 +27,6 @@ def install():
 
     puts('❯ Remove cache and dependencies...')
     local('rm -rf var/cache/*')
-    local('rm -rf .sass-cache')
     local('rm -rf bower_components')
     local('rm -rf web/js')
     local('rm -rf web/css')
@@ -43,18 +40,46 @@ def install():
 
     puts('❯❯ CSS compile')
     local('compass compile')
+    local('mkdir web/css/fonts')
+    local('mkdir web/css/fonts/icons')
+    local('cp bower_components/gumby/fonts/icons/entypo.eot web/css/fonts/icons/')
+    local('cp bower_components/gumby/fonts/icons/entypo.ttf web/css/fonts/icons/')
+    local('cp bower_components/gumby/fonts/icons/entypo.woff web/css/fonts/icons/')
+    local('cp bower_components/animate.css/animate.css web/css/')
+    local('cp bower_components/swipebox/src/css/swipebox.min.css web/css/')
+    local('cp src/frontend/css/main.css web/css/')
+    local('cp src/frontend/css/main.admin.css web/css/')
 
     puts('❯❯ Javascript compile vendors...')
     local('claymate build')
     local('bower install gumby-images')
-    local('bower install gumby-inview')
-    local('bower install gumby-parallax')
-    local('claymate build --addons bower_components/gumby-images/gumby.images.js')
-    local('claymate build --addons bower_components/gumby-inview/gumby.inview.js')
-    local('claymate build --addons bower_components/gumby-parallax/gumby.parallax.js')
 
     local('mkdir web/js')
     local('mv gumby.min.js web/js')
     local('cp bower_components/jquery/jquery.min.js web/js/')
     local('cp bower_components/jquery/jquery.min.map web/js/')
     local('cp bower_components/modernizr/modernizr.js web/js/')
+    local('cp bower_components/scrollReveal.js/scrollReveal.js web/js/')
+    local('cp bower_components/lazyloadxt/dist/jquery.lazyloadxt.min.js web/js/')
+    local('cp bower_components/swipebox/src/js/jquery.swipebox.min.js web/js/')
+    local('cp src/frontend/js/main.js web/js/')
+    local('cp src/frontend/js/main.admin.js web/js/')
+
+    local('cp bower_components/swipebox/src/img/icons.png web/img/')
+    local('cp bower_components/swipebox/src/img/icons.svg web/img/')
+    local('cp bower_components/swipebox/src/img/loader.gif web/img/')
+
+    local('rm -rf index.html')
+
+@task
+def update():
+
+    puts('❯ Update JS and CSS main')
+
+    puts('❯❯ Copy CSS main')
+    local('cp src/frontend/css/main.css web/css/')
+    local('cp src/frontend/css/main.admin.css web/css/')
+
+    puts('❯❯ Copy Javascript main')
+    local('cp src/frontend/js/main.js web/js/')
+    local('cp src/frontend/js/main.admin.js web/js/')

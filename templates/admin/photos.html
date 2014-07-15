@@ -1,0 +1,18 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}photos{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+    		<h2 class="text-center">Liste des photos</h2>
+    		{% if album is defined %}<h3 class="text-center"><small>{{ album.title }}</small></h3>{% endif %}
+    		<hr/>
+  		</div>
+  		<div class="twelve columns text-center">
+  			{% for photo in photos %}
+				<a href="/admin/photos/{{ photo.id }}/"><img class="photo {% if photo.is_published == false %}photo-disable{% endif %}" src="{{ photo.images.small }}"></a>
+			{% endfor %}
+  		</div>
+	</div>
+{% endblock %}

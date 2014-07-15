@@ -1,0 +1,54 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+/**
+ * NAV
+ */
+.navbar {
+	background: #3085d6;
+}
+
+.navbar ul li > a {
+	color: #fff;
+	text-shadow: none;
+	font-weight: bold;
+}
+
+.gumby-no-touch .navbar ul li:hover > a, .gumby-touch .navbar ul li.active > a {
+	position: relative;
+ 	background: #ffffff; 
+	z-index: 1000;
+	color: #3085d6;
+	text-shadow: none;
+}
+
+.navbar ul li .dropdown {
+	background: #3085d6;
+}
+
+.navbar li .dropdown ul > li a {
+	color: #fff;
+}
+
+.gumby-no-touch .navbar li .dropdown ul li a:hover {
+background: #fff;
+}
+
+
+.text-center {
+	text-align: center;
+}
+
+.photo {
+	border-style:solid; 
+	border-color:#cccccc;
+	opacity: 0.5;
+}
+
+.photo-disable {
+	border-color:red;
+}
+
+.photo:hover {
+	opacity: 1;
+}

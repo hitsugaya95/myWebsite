@@ -1,0 +1,41 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}photo{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+    		<h2 class="text-center">{{photo.title}}</h2>
+    		<hr/>
+  		</div>
+  		<div class="twelve columns text-center">
+  			<img src="{{ photo.images.large }}">
+  			<div class="medium info btn"><a href="/admin/photos/{{ photo.id }}/cover/">Ajouter comme photo de couverture</a></div>
+  		</div>
+
+  		<div class="centered ten columns text-center">
+    		<form action="/admin/photos/{{ photo.id }}/" method="POST">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<li class="field">
+							<label for="title">Titre</label>
+							<input class="wide text input" name="title" id="title" type="text" placeholder="Titre" value="{{ photo.title }}" readonly>
+						</li>
+						<li class="field">
+							<label class="checkbox" for="is_published">
+							    <input name="is_published" id="is_published" type="checkbox" {% if photo.is_published == 1 %}checked="checked"{% endif %}>
+							    <span></span> Publié
+							</label>
+						</li>
+						<li class="field">
+							<div class="medium default btn icon-left entypo icon-tools"><a href="#"><input type="submit" value="Modifier"></a></div>
+						  	<div class="medium success btn icon-right entypo icon-reply"><a href="/admin/albums/{{ photo.album_id }}/photos/">Retour</a></div>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
+  		</div>
+
+	</div>
+{% endblock %}

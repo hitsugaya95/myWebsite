@@ -1,0 +1,33 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}{{ album.title }}{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">{{ album.title }}</h2>
+    		<hr/>
+    	</div>
+    	<div class="centered ten columns" align="center">
+    		<form id="update-album" action="/admin/albums/{{ album.id }}/" method="POST">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<li class="field">
+							<label for="title">Titre</label>
+							<input class="wide text input" name="title" id="title" type="text" placeholder="Titre" value="{{ album.title }}" />
+						</li>
+						<li class="field">
+							<label for="description">Description</label>
+							<textarea name="description" id="description" class="wide input textarea" placeholder="Description">{{ album.description }}</textarea>
+						</li>
+						<li class="field">
+							<div class="medium default btn icon-left entypo icon-tools"><a href="#" id="modify-album">Modifier</a></div>
+						  	<div class="medium success btn icon-right entypo icon-reply"><a href="/admin/albums/">Retour</a></div>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
+  		</div>
+	</div>
+{% endblock %}

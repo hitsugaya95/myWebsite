@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}Photos{% endblock %}
+
+{% block content %}
+	{% include 'menu.html' %}
+
+	<div class="row">
+		<div class="twelve columns text-center">
+			<h2>{{ album.title }}</h2>
+			<p>{{ album.description }}</p>
+		</div>
+		<hr/>
+	</div>
+
+	<div class='row'>
+		<div class="twelve columns text-center">
+			{% for photo in photos %}
+				<a href="{{ photo.images.large}}" class="swipebox" title="{{ photo.title }}">
+		    		<img alt="{{ photo.title }}" data-src="{{ photo.images.small}}">
+		  		</a>
+			{% endfor %}
+		</div>
+	</div>
+<script>
+	(function() {
+		$('.swipebox').swipebox( {
+			hideBarsDelay : 5000,
+		});
+	})();
+</script>
+{% endblock %}
+
+

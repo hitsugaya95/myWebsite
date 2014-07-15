@@ -1,8 +1,12 @@
 {
   "name": "jimmyphimmasone",
   "version": "1.0.0",
-  "devDependencies": {
+  "dependencies": {
     "jquery": "2.0.*",
-    "modernizr": "2.8.*"
+    "modernizr": "2.8.*",
+    "animate.css": "3.2.*",
+    "scrollReveal.js": "0.1.*",
+    "lazyloadxt": "1.0.*",
+    "swipebox": "1.2.*"
   }
 }

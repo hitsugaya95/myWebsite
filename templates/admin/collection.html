@@ -1,0 +1,33 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}{{ collection.title }}{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">{{ collection.title }}</h2>
+    		<hr/>
+    	</div>
+    	<div class="centered ten columns" align="center">
+    		<form id="update-collection" action="/admin/collections/{{ collection.id }}/" method="POST">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<li class="field">
+							<label for="title">Titre</label>
+							<input class="wide text input" name="title" id="title" type="text" placeholder="Titre" value="{{ collection.title }}" />
+						</li>
+						<li class="field">
+							<label for="description">Description</label>
+							<textarea name="description" id="description" class="wide input textarea" placeholder="Description">{{ collection.description }}</textarea>
+						</li>
+						<li class="field">
+							<div class="medium default btn icon-left entypo icon-tools"><a href="#" id="modify-collection">Modifier</a></div>
+						  	<div class="medium success btn icon-right entypo icon-reply"><a href="/admin/collections/">Retour</a></div>
+					</li>
+					</ul>
+				</fieldset>
+			</form>
+  		</div>
+	</div>
+{% endblock %}

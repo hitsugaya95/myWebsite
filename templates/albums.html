@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}Albums{% endblock %}
+
+{% block content %}
+	{% include 'menu.html' %}
+
+	<div class="row">
+		<div class="twelve columns text-center">
+			<h2>{{ collection.title }}</h2>
+			<p>{{ collection.description }}</p>
+		</div>
+		<hr/>
+	</div>
+
+	<div class="row">
+		{% include 'itinerary.html' %}
+
+		<div class="{% if null != itineraries %}six columns{% else %}centered seven columns text-center{% endif %} ">
+			<h3 class="text-center">Albums</h2>
+			<hr/>
+			<section>
+				{% for album in albums %}
+					<article class="valign row {% if loop.index is odd %}text-left{% else %}text-right{% endif %}">
+						{% if loop.index is odd %}
+							<div>
+								<a href="/albums/{{ album.id }}/">
+					        		<img src="{{ album.image }}" width="100px" />
+					        	</a>
+					      	</div>
+							<div>
+						    	<h4 style="font-size:15px"><a href="/albums/{{ album.id }}/">{{ album.title }}</a></h4>
+						        {% if null != album.description %}
+						        	<p style="font-size:12px">{{ album.description }}</p>
+						        {% endif %}
+						        <p style="font-size:12px">{{ album.count_picture }} photos</p>
+						    </div>
+						{% else %}
+							<div>
+						    	<h4 style="font-size:15px"><a href="/albums/{{ album.id }}/">{{ album.title }}</a></h4>
+						        {% if null != album.description %}
+						        	<p style="font-size:12px">{{ album.description }}</p>
+						        {% endif %}
+						        <p style="font-size:12px">{{ album.count_picture }} photos</p>
+						    </div>
+							<div>
+								<a href="/albums/{{ album.id }}/">
+					        		<img src="{{ album.image }}" width="100px" />
+					        	</a>
+					      	</div>
+						{% endif %}
+					</article>
+				{% endfor %}
+			</section>
+		</div>
+	</div>
+{% endblock %}

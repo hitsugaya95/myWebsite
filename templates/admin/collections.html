@@ -1,0 +1,40 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}collections{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">Liste des collections</h2>
+    		<hr/>
+  		</div>
+  		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Titre</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th># albums</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for collection in collections %}
+					<tr>
+						<td>{{ collection.id }}</td>
+						<td>{{ collection.title }}</td>
+						<td>{{ collection.description }}</td>
+						<td><img src="{{ collection.image }}"></td>
+						<td>{{ collection.count_album }}</td>
+						<td>
+							<div class="small secondary btn"><a href="/admin/collections/{{ collection.id }}/">Modifier</a></div>
+							<div class="small primary btn icon-left entypo icon-picture"><a href="/admin/collections/{{ collection.id }}/albums/">Albums</a></div>
+							<div class="small primary btn icon-left entypo icon-address"><a href="/admin/itinerary/{{ collection.id }}/">Itinéraire</a></div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

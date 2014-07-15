@@ -1,0 +1,16 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Import photos{% endblock %}
+
+{% block content %}
+	<div class="row">
+  		<div class="twelve columns">
+    		<h2 class="text-center">Importation des photos</h2>
+    		<hr/>
+  		</div>
+
+  		<div class="centered ten columns text-center">
+	  		<p>Ajout : {% if import > 0 %} {{ import }} {% else %}0{% endif %} photos</p>
+	    </div>
+	</div>
+{% endblock %}
