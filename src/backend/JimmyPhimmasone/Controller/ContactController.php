@@ -10,6 +10,7 @@ class ContactController
     public function sendEmailAction(Request $request, Application $app)
     {
     	$email = $request->get('email');
+        $name = $request->get('name');
         $subject = $request->get('subject');
     	$message = $request->get('message');
 
@@ -25,6 +26,11 @@ class ContactController
         	return $app->json($error, 404);
     	} 
 
+        if ($name == "") {
+            $error = "empty name";
+
+            return $app->json($error, 404);
+        }
 
     	if ($message == "") {
     		$error = "empty message";
@@ -32,7 +38,7 @@ class ContactController
         	return $app->json($error, 404);
     	}
 
-    	$app['repository.contact']->sendEmail($email, $subject, $message);
+    	$app['repository.contact']->sendEmail($email, $name, $subject, $message);
 
     	return $app->json('success', 200);
     }

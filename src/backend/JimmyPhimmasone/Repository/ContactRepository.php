@@ -24,17 +24,19 @@ class ContactRepository
 	 * Send mail
 	 *
 	 * @param string $from sender(s)
+	 * @param string $name
 	 * @param string $subject
 	 * @param string $content
-	 *
 	 */
-    public function sendEmail($from, $subject, $content)
+    public function sendEmail($from, $name, $subject, $content)
     {
+    	$body = "Email : ".$from."\r\n\r\n".$content;
+
     	$message = \Swift_Message::newInstance()
 	        ->setSubject($subject)
-	        ->setFrom(array($from))
+	        ->setFrom(array($this->email => $name))
 	        ->setTo(array($this->email))
-	        ->setBody($content)
+	        ->setBody($body)
 		;
 
     	return $this->getMailer()->send($message);
