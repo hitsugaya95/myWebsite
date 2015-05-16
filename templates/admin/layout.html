@@ -13,13 +13,14 @@
        	<script gumby-touch="/js" src="/js/gumby.min.js" type="text/javascript"></script>
        	<script src="/js/gumby.images.js" type="text/javascript"></script>
        	<script src="/js/main.admin.js" type="text/javascript"></script>
+       	<meta name="robots" content="noindex,nofollow" />
     </head>
     <body>
     	<div class="navbar row">
 			<a class="toggle" href="#"><i class="icon-menu"></i></a>
 			<h1 class="four columns logo">
 		    	<a href="/admin/" class="mini-title">
-			      <img id="nav-logo" src="/img/jimmy.png" class="circular" gumby-retina />
+			      <img id="nav-logo" src="/img/{{ app.user }}.png" class="circular" gumby-retina />
 			    </a>
 		  	</h1>
 			<ul class="eight columns">
@@ -34,7 +35,10 @@
 						</ul>
 					</div>
 				</li>
+				<li><a href="/admin/blog/articles">Blog</a></li>
 				<li><a href="/">Site Web</a></li>
+				<li><a href="{{ path('admin_logout') }}">Se déconnecter</a></li>
+				
 			</ul>
 		</div>
 

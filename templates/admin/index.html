@@ -3,12 +3,13 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <div class="row">
-		  <div class="centered twelve columns">
-		    <p>Bienvenue sur la page d'administration</p>
+  <div class="row">
+	  <div class="centered twelve columns">
+	    <p>Bienvenue <strong>{{ app.user }}</strong> sur la page d'administration</p>
 
-		    <p>Nombre de collections : {{ collections}}</p>
-		    <p>Nombre d'albums : {{ albums}}</p>
-		    <p>Nombre de photos : {{ photos}}</p>
-		</div>
+	    <p>Nombre de collections : {{ collections}}</p>
+	    <p>Nombre d'albums : {{ albums}}</p>
+	    <p>Nombre de photos : {{ photos}}</p>
+	  </div>
+	</div>
 {% endblock %}

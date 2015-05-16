@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Login - Admin</title>
+      <link href="/css/sass/gumby.css" rel="stylesheet" type="text/css">
+      <link href="/css/main.admin.css" rel="stylesheet" type="text/css">
+
+      <link rel="icon" type="image/png" href="/img/favicon.png" />
+	<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" /><![endif]-->
+
+     	<script src="/js/jquery.min.js" type="text/javascript"></script>
+     	<script src="/js/modernizr.js" type="text/javascript"></script>
+     	<script gumby-touch="/js" src="/js/gumby.min.js" type="text/javascript"></script>
+     	<script src="/js/gumby.images.js" type="text/javascript"></script>
+     	<script src="/js/main.admin.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+		<div class="row">
+			  <div class="centered twelve columns">
+
+			    <form action="{{ path('admin_login_check') }}" method="post">
+				    
+				    <fieldset>
+						  <legend>Login</legend>
+						  <span style="color:red">{{ error }}</span>
+						  <ul>
+						    <li class="field">
+						      <label class="inline" for="_username">Identifiant</label>
+						      <input type="text" class="input" name="_username" value="{{ last_username }}" />
+						    </li>
+						    <li class="field">
+						      <label class="inline" for="_password">Password</label>
+						      <input type="password" class="input" name="_password" value="" />
+						    </li>
+
+						    <div class="medium secondary btn"><input type="submit" /></div>
+						  </ul>
+						</fieldset>
+					</form>
+			</div>
+		</div>
+
+		<footer class="footer" style="margin-top:10px">
+    	<div class="row">
+    		<div class="centered twelve columns">
+    			<hr />
+    		</div>
+    	</div>
+    	<nav class="footer">
+    		<section class="row">
+    			<div class="four columns copyright">
+    				<p>© Copyright 2014. Tous droits réservés.</p>
+    			</div>
+    		</section>
+    	</nav>
+    </footer>
+	</body>
+</html>
+
+
+

@@ -28,11 +28,27 @@ $app->get('/contact/', 'JimmyPhimmasone\Controller\ContactController::indexActio
 $app->post('/send-email/', 'JimmyPhimmasone\Controller\ContactController::sendEmailAction')
     ->bind('send-email');
 
+
+/*******
+********
+**BLOG**
+********
+*******/
+
+// Index
+$app->get('/blog/', 'Blog\Controller\IndexController::indexAction')
+    ->bind('blog');
+
+
 /*********
 **********
 ADMIN
 **********
 *********/
+
+// Login
+$app->get('/login/', 'Admin\Controller\LoginController::indexAction')
+    ->bind('admin-login');
 
 // Admin
 $app->get('/admin/', 'Admin\Controller\IndexController::indexAction')
@@ -126,3 +142,12 @@ $app->post('/admin/itinerary/{collectionId}/add/', 'Admin\Controller\ItineraryCo
 // Delete
 $app->post('/admin/itinerary/delete/', 'Admin\Controller\ItineraryController::deleteAction')
     ->bind('admin-itinerary-delete');
+
+/**
+ * BLOG
+ *
+ */
+
+// Articles
+$app->get('/admin/blog/articles/', 'Admin\Controller\BlogController::articlesAction')
+    ->bind('admin-blog-articles');

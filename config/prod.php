@@ -15,21 +15,32 @@ $app['email'] = 'contact@jimmyphimmasone.fr';
 // Doctrine (db)
 $app['db.options'] = array(
     'driver'   => 'pdo_mysql',
-    'host'     => '127.0.0.1',
+    'host'     => 'localhost',
     'port'     => null,
     'dbname'   => 'jimmyphimmasone',
     'user'     => 'root',
     'password' => '123',
 );
 
+// SwiftMailer
+$app['swiftmailer.options'] = array(
+    'host' => 'smtp.gmail.com',
+    'port' => 465,
+    'username' => 'test',
+    'password' => 'test',
+    'encryption' => 'ssl',
+    'auth_mode' => 'login'
+);
+
 // Security
 $app['security.firewalls'] = array(
     'admin' => array(
         'pattern' => '^/admin',
-        'http' => true,
+        'form' => array('login_path' => '/login', 'check_path' => '/admin/login_check'),
+        'logout' => array('logout_path' => '/admin/logout'),
         'users' => array(
-            // raw password is foo
-            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+            'mimy' => array('ROLE_ADMIN', 'UxDMbcaiQ3eYlliSIhZaiMx3VojNZmhvC8MRI4FJbzU9rharS2vpAVzciIkLnL8fKG7/r9FXl10pAQMXjxfO5g=='),
+            'lily'  => array('ROLE_ADMIN', 'enWrHH8O34eomypOPMuCih0AIHUORmP62/JiUBRD0uPHS2slbelhHCoMeHZtnbepRh8SHtIwVw4bc8dU5W0Ayg=='),
         ),
     ),
 );

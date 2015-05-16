@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController
 {
     public function indexAction(Request $request, Application $app)
-    {
+    {      
     	$collections = $app['repository.database']->getCollections();
     	$albums = $app['repository.database']->getAlbums();
     	$photos = $app['repository.database']->getPhotos();

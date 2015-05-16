@@ -20,18 +20,9 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 $app->register(new Silex\Provider\SwiftmailerServiceProvider());
 
-$app['swiftmailer.options'] = array(
-    'host' => 'HOST',
-    'port' => 465,
-    'username' => 'USERNAME@TEST.COM',
-    'password' => 'PASSWORD',
-    'encryption' => 'ssl',
-    'auth_mode' => 'login'
-);
-
-// $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-//     'security.firewalls' => $app['security.firewalls']
-// ));
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => $app['security.firewalls']
+));
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.options' => array(
@@ -64,6 +55,17 @@ $app['service.googlemaps'] = $app->share(function () {
 
 $app['service.flickr'] = $app->share(function () {
     return new Service\Flickr();
+});
+
+// get User
+$app['user'] = $app->share(function ($app) {
+    $token = $app['security']->getToken();
+    if (null !== $token) {
+        $user = $token->getUser();
+        return $user->getUsername();
+    }
+
+    return null;
 });
 
 // Register the error handler.
