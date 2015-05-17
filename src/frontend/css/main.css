@@ -354,21 +354,23 @@ h2 {
 }
 
 /*
- * CLOUD
+ * CLOUDS
  */
 
-#cloud {
-  width:350px;
-  height:120px;
-  background : #00FFCC;
+/* Quotes clouds */
+
+#quotes-cloud {
+	width:300px;
+  	height:100px;
+  	background : #00FFCC;
   
-  background: linear-gradient(top, #00FFCC 5%, #fff 100%);
+  	background: linear-gradient(top, #00FFCC 5%, #fff 100%);
 	background: -webkit-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
 	background: -moz-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
 	background: -ms-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
 	background: -o-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
   
-  border-radius: 100px;
+  	border-radius: 100px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	
@@ -376,15 +378,15 @@ h2 {
 	margin: 120px auto 20px;
 }
 
-#cloud:after, #cloud:before {
+#quotes-cloud:after, #quotes-cloud:before {
 	content: '';
 	position: absolute;
 	background: #00FFCC;
 	z-index: -1
 }
 
-#cloud:after {
-  width: 130px; height: 150px;
+#quotes-cloud:after {
+  	width: 130px; height: 150px;
 	top: -40px; right: 40px;
 	
 	border-radius: 200px;
@@ -392,7 +394,73 @@ h2 {
 	-moz-border-radius: 200px;
 }
 
-#cloud:before {
+#quotes-cloud:before {
+	width: 150px; height: 190px;
+	top: -50px; left: 40px;
+	
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+}
+
+#quotes-rounds:after, #quotes-rounds:before {
+	content: '';
+	position: absolute;
+	background: #00FFCC;
+	z-index: -1
+}
+
+#quotes-rounds:after {
+  width: 170px; height: 150px;
+	top: 0px; right: 30px;
+	
+	border-radius: 200px;
+	-webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+}
+
+#quotes-rounds:before {
+	width: 0px;
+}
+
+/* Anecdotes clouds */
+
+#anecdotes-cloud {
+	width:320px;
+	height:110px;
+	background : #00FFCC;
+
+	background: linear-gradient(top, #00FFCC 5%, #fff 100%);
+	background: -webkit-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -moz-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -ms-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -o-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+  
+  	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	
+	position: relative;
+	margin: 120px auto 20px;
+}
+
+#anecdotes-cloud:after, #anecdotes-cloud:before {
+	content: '';
+	position: absolute;
+	background: #00FFCC;
+	z-index: -1
+}
+
+#anecdotes-cloud:after {
+  	width: 130px; height: 150px;
+	top: -40px; right: 40px;
+	
+	border-radius: 200px;
+	-webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+}
+
+#anecdotes-cloud:before {
 	width: 200px; height: 190px;
 	top: -50px; left: 40px;
 	
@@ -401,15 +469,15 @@ h2 {
 	-moz-border-radius: 100px;
 }
 
-#rounds:after, #rounds:before {
+#anecdotes-rounds:after, #anecdotes-rounds:before {
 	content: '';
 	position: absolute;
 	background: #00FFCC;
 	z-index: -1
 }
 
-#rounds:after {
-  width: 170px; height: 170px;
+#anecdotes-rounds:after {
+  	width: 130px; height: 140px;
 	top: 0px; right: 30px;
 	
 	border-radius: 200px;
@@ -417,11 +485,110 @@ h2 {
 	-moz-border-radius: 200px;
 }
 
-#rounds:before {
+#anecdotes-rounds:before {
+	width: 0px;
+}
+
+/* Impressions clouds */
+#impressions-cloud {
+	width:350px;
+	height:120px;
+	background : #00FFCC;
+
+	background: linear-gradient(top, #00FFCC 5%, #fff 100%);
+	background: -webkit-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -moz-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -ms-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+	background: -o-linear-gradient(top, #00FFCC 5%, #00FFCC 100%);
+  
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	
+	position: relative;
+	margin: 120px auto 20px;
+}
+
+#impressions-cloud:after, #cloud:before {
+	content: '';
+	position: absolute;
+	background: #00FFCC;
+	z-index: -1
+}
+
+#impressions-cloud:after {
+  	width: 130px; height: 150px;
+	top: -35px; right: 45px;
+	
+	border-radius: 200px;
+	-webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+}
+
+#impressions-cloud:before {
+	width: 0px;
+}
+
+#impressions-rounds:after, #impressions-rounds:before {
+	content: '';
+	position: absolute;
+	background: #00FFCC;
+	z-index: -1
+}
+
+#impressions-rounds:after {
+  	width: 170px; height: 170px;
+	top: -25px; right: 30px;
+	
+	border-radius: 200px;
+	-webkit-border-radius: 200px;
+	-moz-border-radius: 200px;
+}
+
+#impressions-rounds:before {
 	width: 200px; height: 190px;
-	top: -30px; left: 40px;
+	top: -37px; left: 30px;
 	
 	border-radius: 100px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 }
+
+.quotes-cloud-title {
+	width: 300px;
+	height: 100px;
+	padding: 35px;
+}
+
+.anecdotes-cloud-title {
+	width: 320px;
+	height: 110px;
+	padding: 40px;
+}
+
+.impressions-cloud-title {
+	width: 350px;
+	height: 120px;
+	padding: 45px;
+}
+
+.cloud-title {
+	color: #FFF;
+	display: block;
+	text-align: center;
+	margin: 0px auto;
+	font-size: 25px;
+}
+
+.cloud-title:hover {
+	color: #444;
+}
+
+.blog-title {
+	margin: -120px auto; 
+	width:140px; 
+	height:120px;
+	display:block;
+	text-align:center;
+	position:relative;
+} 
