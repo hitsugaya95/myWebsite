@@ -39,6 +39,10 @@ $app->post('/send-email/', 'JimmyPhimmasone\Controller\ContactController::sendEm
 $app->get('/blog/', 'Blog\Controller\IndexController::indexAction')
     ->bind('blog');
 
+// Quotes of the day
+$app->get('/blog/quote-of-day/', 'Blog\Controller\QuoteController::indexAction')
+    ->bind('blog-quote');
+
 
 /*********
 **********
