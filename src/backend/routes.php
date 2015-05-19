@@ -40,9 +40,19 @@ $app->get('/blog/', 'Blog\Controller\IndexController::indexAction')
     ->bind('blog');
 
 // Quotes of the day
-$app->get('/blog/quote-of-day/', 'Blog\Controller\QuoteController::indexAction')
+$app->get('/blog/quote-of-day/', 'Blog\Controller\QuotesController::indexAction')
     ->bind('blog-quote');
 
+// Anecdotes
+$app->get('/blog/anecdotes/', 'Blog\Controller\AnecdotesController::indexAction')
+    ->bind('blog-anecdote');
+
+// Impressions
+$app->get('/blog/impressions/', 'Blog\Controller\ImpressionsController::indexAction')
+    ->bind('blog-impression');
+
+// Impression
+$app->get('/blog/impressions/{impressionId}/', 'Blog\Controller\ImpressionsController::impressionAction');
 
 /*********
 **********
@@ -152,6 +162,13 @@ $app->post('/admin/itinerary/delete/', 'Admin\Controller\ItineraryController::de
  *
  */
 
-// Articles
-$app->get('/admin/blog/articles/', 'Admin\Controller\BlogController::articlesAction')
-    ->bind('admin-blog-articles');
+// Quotes
+$app->get('/admin/blog/quotes/', 'Admin\Controller\BlogController::quotesAction')
+    ->bind('admin-blog-quotes');
+
+$app->get('/admin/blog/quotes/add/', 'Admin\Controller\BlogController::addQuotesAction')
+    ->bind('admin-blog-add-quotes');
+
+$app->get('/admin/blog/quotes/search-giphy/', 'Admin\Controller\BlogController::searchGiphyAction')
+    ->bind('admin-blog-search-giphy');
+ 

@@ -63,5 +63,30 @@
 	    })
 	});
 
+	// Search giphy
+	$(document).on('click', '#search-giphy', function(e){
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/quotes/search-giphy/",
+	        data: $("#search-giphy-form").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(gifs) {
+	    	console.log(gifs)
+	    	$('#search-giphy-field').removeClass('danger')
+	    	var table = $('#giphy-gif');
+	    	gifs.forEach( function (arrayItem) {
+			    table.append(arrayItem.iframe)
+			});
+	        // $('#latitude').val(html[0]);
+	        // $('#longitude').val(html[1]);
+	    })
+	    .fail(function(textStatus) {
+	    	$('#search-giphy-field').addClass('danger')
+	        return false
+	    })
+	});
+
+
 })();
 

@@ -1,0 +1,86 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Ajout phrase du jour{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Ajouter une nouvelle phrase</h2>
+  		<hr/>
+		</div>
+
+  	<div class="centered ten columns" align="center">
+  		<form action="/admin/blog/quotes/add/" method="POST">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<div class="row">
+							<div class="five columns">
+								<li class="field">
+									<label for="author">Auteur</label>
+									<input class="wide text input" name="author" id="author" type="text" placeholder="Lily" />
+								</li>
+								<li class="field">
+									<label for="date">Date</label>
+									<input class="wide text input" name="date" id="date" type="text" placeholder="jj/mm/yyyy" />
+								</li>
+								<li class="field">
+									<label for="city">Ville</label>
+									<input class="wide text input" name="city" id="city" type="text" placeholder="Paris" />
+								</li>
+								<li class="field">
+									<label for="country">Pays</label>
+									<input class="wide text input" name="country" id="country" type="text" placeholder="France" />
+								</li>
+							</div>
+							<div class="seven columns">
+								<li class="field">
+									<label for="quote">Phrase</label>
+									<textarea name="quote" id="quote" class="wide input textarea" placeholder="The world is yours."></textarea>
+								</li>
+								<li class="field">
+									<label for="giphy">Giphy <small><a href="#" class="switch" gumby-trigger="#giphyModal">rechercher</a></small></label>
+									<input class="wide text input" name="giphy" id="giphy" type="text" value="" readonly />
+								</li>
+								<li class="field">
+								  <label class="checkbox checked" for="check1">
+								    <input name="isEnabled" value="1" type="checkbox" checked="checked">
+								    <span></span> Publier
+								  </label>
+								</li>
+							</div>
+						</div>
+						<div class="row">
+						<li class="field">
+							<div class="medium success btn icon-left entypo icon-plus-squared"><a href="#" id="add-quote">Ajouter</a></div>
+						  <div class="medium default btn icon-right entypo icon-reply"><a href="/admin/blog/quotes/">Retour</a></div>
+						</li>
+						</div>
+					</ul>
+				</fieldset>
+			</form>
+  	</div>
+
+  	<div class="modal" id="giphyModal">
+		  <div class="content">
+		    <a class="close switch" gumby-trigger="|#giphyModal"><i class="icon-cancel" /></i></a>
+		    <div class="row">
+		      <div class="ten columns centered text-center">
+		        <h2>Rechercher un GIF</h2>
+		        <form action="/admin/blog/quotes/giphy-search/" method="GET" id="search-giphy-form">
+		        	<li class="append field" id="search-giphy-field">
+						    <input class="wide input" name="search" type="text" placeholder="Chat+marrant" />
+						    <div class="medium primary btn"><a id="search-giphy">Rechercher</a></div>
+						  </li>
+		        </form>
+		        <div id="giphy-gif"></div>
+		        <p class="btn primary medium">
+		          <a href="#" class="switch" gumby-trigger="|#giphyModal">Fermer</a>
+		        </p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	</div>
+{% endblock %}

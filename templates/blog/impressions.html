@@ -1,0 +1,70 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}Blog-Impressions{% endblock %}
+
+{% block content %}
+
+<div style="margin-bottom: 200px;">
+  <div id="quotes-blue-cloud" style="margin:150px 850px auto auto;display:block">
+    <span id="quotes-blue-rounds">
+      <a class="cloud-title quotes-cloud-title" href="/blog/">Accueil</a>
+    </span>
+  </div>
+
+  <div id="anecdotes-blue-cloud" style="margin:-190px 350px auto auto;display:block">
+    <span id="anecdotes-blue-rounds">
+      <a class="cloud-title anecdotes-cloud-title" href="/blog/quote-of-day/">Phrase du jour</a>
+    </span>
+  </div>
+
+  <div id="impressions-blue-cloud" style="margin:100px 95px auto auto;display:block">
+    <span id="impressions-blue-rounds">
+      <a class="cloud-title impressions-cloud-title" href="/blog/anecdotes/">Anecdotes</a>
+    </span>
+  </div>
+
+  <div class="blog-title" style="width: 240px; height: auto;">
+    <h1 style="font-size:50px">Impressions</h1>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="twelve columns" style="margin-top:30px">
+
+  	<div class="row" style="border:1px solid #fff">
+  		<div class="three columns">
+  			<img alt="alice" src="http://farm3.staticflickr.com/2833/9560678322_62cee2dbbe_n.jpg">
+  			<p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">26 avril 2015 à Paris <br />
+  			0 commentaire(s)</p>
+  		</div>
+  		<div class="nine columns">
+  			<p><a class="impression-title" href="/blog/impressions/1/" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">Les chinois de Pékin</a></p>
+    		<p style="font-family:'Cookie', sans-serif !important;font-style:italic; font-size:25px">"Les blancs sont vues différemment en Chine"</p>
+  		</div>
+  	</div>
+
+  	<div class="row">
+			<div class="centered nine columns">
+				<hr></hr>
+			</div>
+		</div>
+
+  	<div class="row" style="border:1px solid #fff">
+  		<div class="three columns">
+  			<img alt="alice" src="http://farm3.staticflickr.com/2844/9454835259_c2abf11a75_n.jpg">
+  			<p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">26 avril 2015 à LA <br />
+  			0 commentaire(s)</p>
+  		</div>
+  		<div class="nine columns">
+  			<p><a class="impression-title" href="#" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">Le sable de LA</a></p>
+    		<p style="font-family:'Cookie', sans-serif !important;font-style:italic; font-size:25px">"Coquillage et crustacées"</p>
+  		</div>
+  	</div>
+
+  </div>
+
+</div>
+
+{% endblock %}
+

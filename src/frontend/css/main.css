@@ -790,4 +790,21 @@ h2 {
 	display:block;
 	text-align:center;
 	position:relative;
-} 
+}
+
+.impression-title {
+	font-size: 25px;
+	color: #000;
+}
+
+.impression-title:hover {
+	color: #2193CC;
+}
+
+.comment-link {
+	color: #000;
+}
+
+.comment-link:hover {
+	color: #2193CC;
+}
