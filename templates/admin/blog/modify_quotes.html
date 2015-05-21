@@ -1,16 +1,16 @@
 {% extends "/admin/layout.html" %}
 
-{% block title %}Ajout phrase du jour{% endblock %}
+{% block title %}Modification - phrase du jour{% endblock %}
 
 {% block content %}
 	<div class="row">
 		<div class="twelve columns">
-  		<h2 class="text-center">Ajouter une nouvelle phrase</h2>
+  		<h2 class="text-center">Modifier la phrase {{ quote.id }} <small><a href="/admin/blog/quotes/delete/{{ quote.id }}/">Supprimer</a></small></h2>
   		<hr/>
 		</div>
 
   	<div class="centered ten columns" align="center">
-  		<form action="/admin/blog/quotes/add/" method="GET" id="form-add-quote">
+  		<form action="/admin/blog/quotes/modify/{{ quote.id }}/" method="GET" id="form-modify-quote">
 				<fieldset>
 					<legend>Informations</legend>
 					<ul>
@@ -18,33 +18,33 @@
 							<div class="five columns">
 								<li class="field">
 									<label for="author">Auteur</label>
-									<input class="wide text input" name="author" id="author" type="text" placeholder="Lily" />
+									<input class="wide text input" name="author" id="author" type="text" placeholder="Lily" value="{{ quote.author }}" />
 								</li>
 								<li class="field">
 									<label for="date">Date</label>
-									<input class="wide text input" name="date" id="date" type="text" placeholder="jj/mm/yyyy" />
+									<input class="wide text input" name="date" value="{{ quote.date|date('d/m/Y') }}" id="date" type="text" placeholder="jj/mm/yyyy" />
 								</li>
 								<li class="field">
 									<label for="city">Ville</label>
-									<input class="wide text input" name="city" id="city" type="text" placeholder="Paris" />
+									<input class="wide text input" name="city" id="city" value="{{ quote.city }}" type="text" placeholder="Paris" />
 								</li>
 								<li class="field">
 									<label for="country">Pays</label>
-									<input class="wide text input" name="country" id="country" type="text" placeholder="France" />
+									<input class="wide text input" name="country" id="country" value="{{ quote.country }}" type="text" placeholder="France" />
 								</li>
 							</div>
 							<div class="seven columns">
 								<li class="field">
 									<label for="quote">Phrase</label>
-									<textarea name="quote" id="quote" class="wide input textarea" placeholder="The world is yours."></textarea>
+									<textarea name="quote" id="quote" class="wide input textarea" placeholder="The world is yours.">{{ quote.quote }}</textarea>
 								</li>
 								<li class="field">
 									<label for="giphy">Giphy <small><a href="http://www.giphy.com/" target="_blank">rechercher</a></small></label>
-									<input class="wide text input" name="giphy" id="giphy" type="text" value="" />
+									<input class="wide text input" name="giphy" value="{{ quote.giphy }}" id="giphy" type="text" value="" />
 								</li>
 								<li class="field">
 								  <label class="checkbox checked" for="check1">
-								    <input name="isEnabled" value="1" type="checkbox" checked="checked">
+								    <input name="isEnabled" {% if quote.is_enabled == true %} checked {% endif %} type="checkbox">
 								    <span></span> Publier
 								  </label>
 								</li>
@@ -52,7 +52,7 @@
 						</div>
 						<div class="row">
 						<li class="field">
-							<div class="medium success btn icon-left entypo icon-plus-squared"><a id="add-quote">Ajouter</a></div>
+							<div class="medium success btn icon-left entypo icon-tools"><a id="modify-quote" data-id="{{ quote.id }}">Modifier</a></div>
 						  <div class="medium default btn icon-right entypo icon-reply"><a href="/admin/blog/quotes/">Retour</a></div>
 						</li>
 						</div>

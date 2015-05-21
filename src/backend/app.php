@@ -49,6 +49,10 @@ $app['repository.itinerary'] = $app->share(function ($app) {
     return new Admin\Repository\ItineraryRepository($app);
 });
 
+$app['repository.quote'] = $app->share(function ($app) {
+    return new Admin\Repository\QuoteRepository($app);
+});
+
 $app['service.googlemaps'] = $app->share(function () {
     return new Service\GoogleMaps();
 });

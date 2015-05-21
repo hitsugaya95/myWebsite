@@ -63,30 +63,44 @@
 	    })
 	});
 
-	// Search giphy
-	$(document).on('click', '#search-giphy', function(e){
+	// add quote
+	$(document).on('click', '#add-quote', function(e){
 		$.ajax({
 	        type: "GET",
-	        url: "/admin/blog/quotes/search-giphy/",
-	        data: $("#search-giphy-form").serialize(),
+	        url: "/admin/blog/quotes/add/",
+	        data: $("#form-add-quote").serialize(),
 	        dataType: 'json'
 	    })
-	    .done(function(gifs) {
-	    	console.log(gifs)
-	    	$('#search-giphy-field').removeClass('danger')
-	    	var table = $('#giphy-gif');
-	    	gifs.forEach( function (arrayItem) {
-			    table.append(arrayItem.iframe)
-			});
-	        // $('#latitude').val(html[0]);
-	        // $('#longitude').val(html[1]);
+	    .done(function(html) {
+	    	alert('La phrase a bien été ajouté')
+	        $(location).attr('href', "/admin/blog/quotes/");
 	    })
-	    .fail(function(textStatus) {
-	    	$('#search-giphy-field').addClass('danger')
-	        return false
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
 	    })
 	});
 
+	// modify quote
+	$(document).on('click', '#modify-quote', function(e){
+		id = $(this).attr('data-id');
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/quotes/modify/"+id+"/",
+	        data: $("#form-modify-quote").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(html) {
+	    	alert('La phrase a bien été modifié')
+	        $(location).attr('href', "/admin/blog/quotes/");
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
+	    })
+	});
 
 })();
 

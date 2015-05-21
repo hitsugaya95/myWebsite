@@ -169,6 +169,9 @@ $app->get('/admin/blog/quotes/', 'Admin\Controller\BlogController::quotesAction'
 $app->get('/admin/blog/quotes/add/', 'Admin\Controller\BlogController::addQuotesAction')
     ->bind('admin-blog-add-quotes');
 
-$app->get('/admin/blog/quotes/search-giphy/', 'Admin\Controller\BlogController::searchGiphyAction')
-    ->bind('admin-blog-search-giphy');
+$app->get('/admin/blog/quotes/modify/{quoteId}/', 'Admin\Controller\BlogController::modifyQuoteAction')
+    ->bind('admin-blog-modify-quotes');
+
+$app->get('/admin/blog/quotes/delete/{quoteId}/', 'Admin\Controller\BlogController::deleteQuotesAction')
+    ->bind('admin-blog-delete-quotes');
  

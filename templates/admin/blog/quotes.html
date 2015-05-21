@@ -9,22 +9,44 @@
   		<hr/>
 		</div>
 
-  	<table>
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Date</th>
-					<th>Ville</th>
-					<th>Pays</th>
-					<th>Phrase</th>
-					<th>Auteur</th>
-					<th>Giphy</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			</tbody>
-		</table>
+		{% if quotes is not empty %}
+	  	<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Publié</th>
+						<th>Auteur</th>
+						<th>Date</th>
+						<th>Ville</th>
+						<th>Pays</th>
+						<th>Phrase</th>
+						<th>Giphy</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for quote in quotes %}
+						<tr>
+							<td>{{ quote.id }}</td>
+							<td style="background-color:{% if quote.is_enabled == true %}green{% else %}red{% endif %}"></td>
+							<td>{{ quote.author }}</td>
+							<td>{{ quote.date|date("d/m/Y") }}</td>
+							<td>{{ quote.city }}</td>
+							<td>{{ quote.country }}</td>
+							<td>{{ quote.quote }}</td>
+							<td>{% if quote.giphy is not null %}<iframe src="//giphy.com/embed/{{ quote.giphy }}?html5=true" width="120" height="100" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>{% endif %}</td>
+							<td>
+								<div class="small primary btn">
+								  <a href="/admin/blog/quotes/modify/{{ quote.id }}/">Modifier</a>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<h4 class="text-center">Aucune phrase ajoutée</h4>
+		{% endif %}
 	</div>
+
 {% endblock %}
