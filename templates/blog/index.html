@@ -46,7 +46,8 @@
   <div class="pull_six six columns">
     <div class="row" style="margin-bottom: 20px;">
       <div class="twelve columns" style="border: 6px solid #00FFCC; padding: 20px; height:135px; max-height:135px">
-        <p>Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour Phrase du jour.</p>
+        <h5>{{ quote.date|date('d/m/y') }} - {{ quote.city }} - {{ quote.country }}</h5>
+        <p style="font-family:'Arial', sans-serif !important;">"{{ quote.quote }}" - by {{ quote.author }}</p>
       </div>
     </div>
     <div class="row">

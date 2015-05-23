@@ -44,6 +44,18 @@
 					{% endfor %}
 				</tbody>
 			</table>
+
+			<!-- Pagination -->
+	    <div class="centered ten columns">
+	      {% if actualPage != 1 %}
+	        <a href="/admin/blog/quotes/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+	      {% endif %}
+
+	      {% if maxPage != actualPage %}
+	        <a href="/admin/blog/quotes/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+	      {% endif %}
+	    </div>
+
 		{% else %}
 			<h4 class="text-center">Aucune phrase ajoutée</h4>
 		{% endif %}

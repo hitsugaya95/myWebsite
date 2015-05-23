@@ -801,10 +801,10 @@ h2 {
 	color: #2193CC;
 }
 
-.comment-link {
+.paginate, .comment-link {
 	color: #000;
 }
 
-.comment-link:hover {
+.paginate:hover, .comment-link:hover {
 	color: #2193CC;
 }

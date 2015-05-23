@@ -9,8 +9,7 @@ class IndexController
 {
     public function indexAction(Request $request, Application $app)
     {
-  //   	$backgrounds = array('splash-1.jpg', 'splash-2.jpg', 'splash-3.jpg', 'splash-4.jpg');
-  //   	$rand = array_rand($backgrounds, 1);
+        $quote = $app['repository.quote']->getLastQuote();
 
   //   	$collections = $app['repository.database']->getCollections();
   //   	$photos = $app['repository.database']->getPhotos();
@@ -19,7 +18,7 @@ class IndexController
   //   	$photos = array_splice($photos, 0, 18);
 
 		return $app['twig']->render('blog/index.html', array(
-			// 'background'  => $backgrounds[$rand],
+			'quote'  => $quote,
 			// 'collections' => $collections,
 			// 'photos'      => $photos
 		));

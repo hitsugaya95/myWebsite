@@ -9,11 +9,14 @@ class QuotesController
 {
     public function indexAction(Request $request, Application $app)
     {
+    	$actualPage = null !== $request->get('page') ? $request->get('page') : 1;
+    	$maxPage = $app['repository.quote']->getQuotesMaxPage(true);
+    	$quotes = $app['repository.quote']->getQuotes(true, $actualPage);
 
 		return $app['twig']->render('blog/quotes.html', array(
-			// 'background'  => $backgrounds[$rand],
-			// 'collections' => $collections,
-			// 'photos'      => $photos
+			'quotes'     => $quotes,
+			'actualPage' => $actualPage,
+			'maxPage'   => $maxPage
 		));
     }
 }

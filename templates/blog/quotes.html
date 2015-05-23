@@ -28,56 +28,47 @@
   </div>
 </div>
 
-<div class="row" style="margin-bottom: 20px;">
+{% if quotes is not empty %}
 
-  <div class="twelve columns" style="text-align:center">
-    <h5>26/04/15 - Ville - Pays</h5>
-    <p style="font-family:'Arial', sans-serif !important;">"Quand je regarde un match de tennis." - by Mimy</p>
-    <iframe src="//giphy.com/embed/ODy29v7YAJrck?html5=true" width="480" height="269" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  {% for quote in quotes %}
+    <div class="row">
+      <div class="twelve columns" style="text-align:center">
+        <h5>{{ quote.date|date('d/m/y') }} - {{ quote.city }} - {{ quote.country }}</h5>
+        <p style="font-family:'Arial', sans-serif !important;">"{{ quote.quote }}" - by {{ quote.author }}</p>
+        {% if quote.giphy is not null %}
+          <iframe src="//giphy.com/embed/{{ quote.giphy }}?html5=true" width="480" height="269" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if loop.last != true %}
+      <div class="row">
+        <div class="centered four columns">
+          <hr></hr>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Pagination -->
+  <div class="row">
+    <div class="centered ten columns">
+      {% if actualPage != 1 %}
+        <a href="/blog/quote-of-day/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+      {% endif %}
+
+      {% if maxPage != actualPage %}
+        <a href="/blog/quote-of-day/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+      {% endif %}
+    </div>
   </div>
-</div>
-
-<div class="row">
-	<div class="centered four columns">
-		<hr></hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="twelve columns" style="text-align:center">
-    <h5>26/04/15 - Ville - Pays</h5>
-    <p style="font-family:'Arial', sans-serif !important;">"Quand j'arrive à Boston." - by Mimy</p>
-    <iframe src="//giphy.com/embed/knoyQk1X5Dfwc?html5=true" width="480" height="201" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+{% else %}
+  <div class="row">
+    <div class="twelve columns" style="text-align:center">
+      <h5>Aucune phrase n'a été ajoutée.</h5>
+    </div>
   </div>
-</div>
+{% endif %}
 
-<div class="row">
-	<div class="centered four columns">
-		<hr></hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="twelve columns" style="text-align:center">
-    <h5>26/04/15 - Ville - Pays</h5>
-    <p style="font-family:'Arial', sans-serif !important;">"Lily en "découvrant" le blog." - by Mimy</p>
-    <iframe src="//giphy.com/embed/7pZSFcwBv3Bde?html5=true" width="480" height="384" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-  </div>
-</div>
-
-<div class="row">
-	<div class="centered four columns">
-		<hr></hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="twelve columns" style="text-align:center">
-    <h5>26/04/15 - Ville - Pays</h5>
-    <p style="font-family:'Arial', sans-serif !important;">"Quand mimy finira le blog." - by Mimy</p>
-    <iframe src="//giphy.com/embed/lI6nHr5hWXlu0?html5=true" width="480" height="341" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-  </div>
-</div>
-<
 {% endblock %}
 

@@ -9,11 +9,15 @@ class BlogController
 {
     public function quotesAction(Request $request, Application $app)
     {      
-    	$quotes = $app['repository.quote']->getQuotes();
+        $actualPage = null !== $request->get('page') ? $request->get('page') : 1;
+        $maxPage = $app['repository.quote']->getQuotesMaxPage(true);
+        $quotes = $app['repository.quote']->getQuotes(false, $actualPage);
 
-		return $app['twig']->render('/admin/blog/quotes.html', array(
-			"quotes" => $quotes,
-		));
+        return $app['twig']->render('admin/blog/quotes.html', array(
+            'quotes'     => $quotes,
+            'actualPage' => $actualPage,
+            'maxPage'   => $maxPage
+        ));
     }
 
     public function addQuotesAction(Request $request, Application $app)
