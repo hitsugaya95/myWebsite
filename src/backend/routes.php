@@ -187,3 +187,19 @@ $app->get('/admin/blog/anecdotes/modify/{anecdoteId}/', 'Admin\Controller\BlogCo
 
 $app->get('/admin/blog/anecdotes/delete/{anecdoteId}/', 'Admin\Controller\BlogController::deleteAnecdotesAction')
     ->bind('admin-blog-delete-anecdotes');
+
+$app->get('/admin/blog/anecdotes/preview/{anecdoteId}/', 'Admin\Controller\BlogController::previewAnecdoteAction')
+    ->bind('admin-blog-preview-anecdote');
+
+// Impressions
+$app->get('/admin/blog/impressions/', 'Admin\Controller\BlogController::impressionsAction')
+    ->bind('admin-blog-impressions');
+
+$app->get('/admin/blog/impressions/add/', 'Admin\Controller\BlogController::addImpressionsAction')
+    ->bind('admin-blog-add-impressions');
+
+$app->get('/admin/blog/impressions/modify/{impressionId}/', 'Admin\Controller\BlogController::modifyImpressionAction')
+    ->bind('admin-blog-modify-impressions');
+
+$app->get('/admin/blog/impressions/delete/{impressionId}/', 'Admin\Controller\BlogController::deleteImpressionsAction')
+    ->bind('admin-blog-delete-impressions');

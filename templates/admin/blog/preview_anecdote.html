@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Preview anecdote</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <link href="/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="/css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/sass/gumby.css" rel="stylesheet" type="text/css">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    
+
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" /><![endif]-->
+
+   	<script src="/js/jquery.min.js" type="text/javascript"></script>
+   	<script src="/js/modernizr.js" type="text/javascript"></script>
+   	<script gumby-touch="/js" src="/js/gumby.min.js" type="text/javascript"></script>
+   	<script src="/js/gumby.images.js" type="text/javascript"></script>
+   	<script src="/js/jquery.swipebox.min.js" type="text/javascript"></script>
+   	<script src="/js/jquery.lazyloadxt.min.js" type="text/javascript"></script>
+   	<script src="/js/main.js" type="text/javascript"></script>
+   	<meta name="description" content="Bienvenue sur mon blog" />
+  </head>
+
+  <body>
+  	<div class="row" style="text-align:center">
+  		<div class="small default btn">
+			  <a href="/admin/blog/anecdotes/">Retour</a>
+			</div>
+  	</div>
+		<div class="row">
+		  <div class="twelve columns" style="text-align:center">
+		    <h5>{{ anecdote.date|date('d/m/y') }}</h5>
+		    <img alt="{{ anecdote.anecdote|raw }}" src="{{ anecdote.image }}">
+		    <p style="font-family:'Arial', sans-serif !important;">"{{ anecdote.anecdote|raw }}"</p>
+		  </div>
+		</div>
+	</body>
+</html>

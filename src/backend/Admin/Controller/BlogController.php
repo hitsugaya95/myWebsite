@@ -132,4 +132,26 @@ class BlogController
 
         return $app->redirect('/admin/blog/anecdotes/');
     }
+
+    public function previewAnecdoteAction($anecdoteId, Request $request, Application $app)
+    {      
+        return $app['twig']->render('/admin/blog/preview_anecdote.html', array(
+            "anecdote" => $app['repository.anecdote']->getAnecdote($anecdoteId),
+        ));
+    }
+
+    public function impressionsAction(Request $request, Application $app)
+    {      
+        // $actualPage = null !== $request->get('page') ? $request->get('page') : 1;
+        // $maxPage = $app['repository.anecdote']->getAnecdotesMaxPage();
+        // $anecdotes = $app['repository.anecdote']->getAnecdotes(false, $actualPage);
+
+        $impressions = null;
+
+        return $app['twig']->render('admin/blog/impressions.html', array(
+            'impressions'     => $impressions,
+            // 'actualPage' => $actualPage,
+            // 'maxPage'   => $maxPage
+        ));
+    }
 }
