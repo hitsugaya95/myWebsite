@@ -10,6 +10,7 @@ class IndexController
     public function indexAction(Request $request, Application $app)
     {
         $quote = $app['repository.quote']->getLastQuote();
+        $anecdote = $app['repository.anecdote']->getLastAnecdote();
 
   //   	$collections = $app['repository.database']->getCollections();
   //   	$photos = $app['repository.database']->getPhotos();
@@ -18,7 +19,8 @@ class IndexController
   //   	$photos = array_splice($photos, 0, 18);
 
 		return $app['twig']->render('blog/index.html', array(
-			'quote'  => $quote,
+			'quote'     => $quote,
+            'anecdote'  => $anecdote,
 			// 'collections' => $collections,
 			// 'photos'      => $photos
 		));

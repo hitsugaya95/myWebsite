@@ -102,5 +102,44 @@
 	    })
 	});
 
+	// add anecdote
+	$(document).on('click', '#add-anecdote', function(e){
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/anecdotes/add/",
+	        data: $("#form-add-anecdote").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(html) {
+	    	alert("L'anecdote a bien été ajouté")
+	        $(location).attr('href', "/admin/blog/anecdotes/");
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
+	    })
+	});
+
+	// modify anecdote
+	$(document).on('click', '#modify-anecdote', function(e){
+		id = $(this).attr('data-id');
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/anecdotes/modify/"+id+"/",
+	        data: $("#form-modify-anecdote").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(html) {
+	    	alert("L'anecdote a bien été modifié")
+	        $(location).attr('href', "/admin/blog/anecdotes/");
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
+	    })
+	});
+
 })();
 

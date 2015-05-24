@@ -1,0 +1,64 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Ajout anecdote{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Ajouter une nouvelle anecdote</h2>
+  		<hr/>
+		</div>
+
+  	<div class="centered ten columns">
+  		<form action="/admin/blog/anecdote/add/" method="GET" id="form-add-anecdote">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<div class="row">
+							<div class="twelve columns">
+								<li class="field" style="text-align:center">
+									<label for="date">Date</label>
+									<input class="normal text input" name="date" id="date" type="text" placeholder="jj/mm/yyyy" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="image">Image <small>(Changer la lettre b en n) <a href="https://www.flickr.com/photos/132622071@N06" target="_blank">rechercher</a></small></label>
+									<input class="text input" name="image" id="image" type="text" placeholder="https://farm6.staticflickr.com/5338/17870034565_d647d65652_n.jpg" />
+								</li>
+
+								<li class="field">
+									<label for="anecdote" style="text-align:center">Anecdote</label>
+									<textarea style="float:left" name="anecdote" id="anecdote" class="wide input textarea wysiwyg" rows="6" cols="10" placeholder="The world is yours"></textarea>
+								</li>
+								<li class="field" style="text-align:center">
+								  <label class="checkbox checked" for="check1">
+								    <input name="isEnabled" value="1" type="checkbox" checked="checked">
+								    <span></span> Publier
+								  </label>
+								</li>
+							</div>
+						</div>
+						<div class="row" style="text-align:center">
+						<li class="field">
+							<div class="medium success btn icon-left entypo icon-plus-squared"><a id="add-anecdote">Ajouter</a></div>
+						  <div class="medium default btn icon-right entypo icon-reply"><a href="/admin/blog/ancedotes/">Retour</a></div>
+						</li>
+						</div>
+					</ul>
+				</fieldset>
+			</form>
+  	</div>
+
+	</div>
+	<script type="text/javascript">
+		$('.wysiwyg').trumbowyg({
+	    lang: 'fr',
+	    autogrow: false,
+	    btns: ['viewHTML',
+      '|', 'btnGrp-design',
+      '|', 'link',
+      '|', 'insertImage',
+      '|', 'btnGrp-justify',
+      '|', 'btnGrp-lists']
+		});
+	</script>
+{% endblock %}

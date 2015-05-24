@@ -53,6 +53,10 @@ $app['repository.quote'] = $app->share(function ($app) {
     return new Admin\Repository\QuoteRepository($app);
 });
 
+$app['repository.anecdote'] = $app->share(function ($app) {
+    return new Admin\Repository\AnecdoteRepository($app);
+});
+
 $app['service.googlemaps'] = $app->share(function () {
     return new Service\GoogleMaps();
 });
@@ -88,5 +92,6 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
     return new Response($message, $code);
 });
+
 
 return $app;

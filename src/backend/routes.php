@@ -174,4 +174,16 @@ $app->get('/admin/blog/quotes/modify/{quoteId}/', 'Admin\Controller\BlogControll
 
 $app->get('/admin/blog/quotes/delete/{quoteId}/', 'Admin\Controller\BlogController::deleteQuotesAction')
     ->bind('admin-blog-delete-quotes');
- 
+
+// Anecdotes
+$app->get('/admin/blog/anecdotes/', 'Admin\Controller\BlogController::anecdotesAction')
+    ->bind('admin-blog-anecdotes');
+
+$app->get('/admin/blog/anecdotes/add/', 'Admin\Controller\BlogController::addAnecdotesAction')
+    ->bind('admin-blog-add-anecdotes');
+
+$app->get('/admin/blog/anecdotes/modify/{anecdoteId}/', 'Admin\Controller\BlogController::modifyAnecdoteAction')
+    ->bind('admin-blog-modify-anecdotes');
+
+$app->get('/admin/blog/anecdotes/delete/{anecdoteId}/', 'Admin\Controller\BlogController::deleteAnecdotesAction')
+    ->bind('admin-blog-delete-anecdotes');

@@ -28,28 +28,45 @@
   </div>
 </div>
 
-<div class="row">
+{% if anecdotes is not empty %}
 
-  <div class="twelve columns" style="text-align:center">
-    <h5>26/04/15</h5>
-    <img alt="alice" src="http://farm3.staticflickr.com/2833/9560678322_62cee2dbbe_n.jpg">
-    <p style="font-family:'Arial', sans-serif !important;">"Quand je regarde un match de tennis.ndhebdehuzbdeuzbdeuzbdeuzbdeuzbdezybdezbdeguz fguezfgezbvfdhzebduhbeudezbudbezufbez"</p>
+  {% for anecdote in anecdotes %}
+    <div class="row">
+      <div class="twelve columns" style="text-align:center">
+		    <h5>{{ anecdote.date|date('d/m/y') }}</h5>
+		    <img alt="{{ anecdote.anecdote|raw }}" src="{{ anecdote.image }}">
+		    <p style="font-family:'Arial', sans-serif !important;">"{{ anecdote.anecdote|raw }}"</p>
+		  </div>
+    </div>
+
+    {% if loop.last != true %}
+      <div class="row">
+        <div class="centered four columns">
+          <hr></hr>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Pagination -->
+  <div class="row">
+    <div class="centered ten columns">
+      {% if actualPage != 1 %}
+        <a href="/blog/anecdotes/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+      {% endif %}
+
+      {% if maxPage != actualPage %}
+        <a href="/blog/anecdotes/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+      {% endif %}
+    </div>
   </div>
-</div>
-
-<div class="row">
-	<div class="centered four columns">
-		<hr></hr>
-	</div>
-</div>
-
-<div class="row">
-	<div class="twelve columns" style="text-align:center">
-    <h5>26/04/15</h5>
-    <img alt="alice" src="http://farm3.staticflickr.com/2844/9454835259_c2abf11a75_n.jpg">
-    <p style="font-family:'Arial', sans-serif !important;">"Quand je regarde un match de tennis.ndhebdehuzbdeuzbdeuzbdeuzbdeuzbdezybdezbdeguz fguezfgezbvfdhzebduhbeudezbudbezufbez"</p>
+{% else %}
+  <div class="row">
+    <div class="twelve columns" style="text-align:center">
+      <h5>Aucune anecdotes n'a été ajoutée.</h5>
+    </div>
   </div>
-</div>
+{% endif %}
 
 {% endblock %}
 

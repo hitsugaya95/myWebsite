@@ -52,7 +52,8 @@
     </div>
     <div class="row">
       <div class="twelve columns" style="border: 6px solid #00FFCC; padding: 20px; height:160px; max-height:160px">
-        <p>Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes Anecdoctes </p>
+        <h5>{{ anecdote.date|date('d/m/y') }}</h5>
+        <p style="font-family:'Arial', sans-serif !important;">"{{ anecdote.anecdote|raw }}"</p>
       </div>
     </div>
   </div>

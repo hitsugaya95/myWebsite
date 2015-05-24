@@ -1,0 +1,58 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Anecdotes{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Liste des anecdotes <small><a href="/admin/blog/anecdotes/add/">Créer</a></small></h2>
+  		<hr/>
+		</div>
+
+		{% if anecdotes is not empty %}
+	  	<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Publié</th>
+						<th>Date</th>
+						<th>Image</th>
+						<th>Anecdote</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for anecdote in anecdotes %}
+						<tr>
+							<td>{{ anecdote.id }}</td>
+							<td style="background-color:{% if anecdote.is_enabled == true %}green{% else %}red{% endif %}"></td>
+							<td>{{ anecdote.date|date("d/m/Y") }}</td>
+							<td><img src="{{ anecdote.image }}"></td>
+							<td>{{ anecdote.anecdote|raw }}</td>
+							<td>
+								<div class="small primary btn">
+								  <a href="/admin/blog/anecdotes/modify/{{ anecdote.id }}/">Modifier</a>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<!-- Pagination -->
+	    <div class="centered ten columns">
+	      {% if actualPage != 1 %}
+	        <a href="/admin/blog/anecdotes/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+	      {% endif %}
+
+	      {% if maxPage != actualPage %}
+	        <a href="/admin/blog/anecdotes/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+	      {% endif %}
+	    </div>
+
+		{% else %}
+			<h4 class="text-center">Aucune anecdotes ajoutée</h4>
+		{% endif %}
+	</div>
+
+{% endblock %}
