@@ -7,6 +7,7 @@
     "animate.css": "3.2.*",
     "scrollReveal.js": "2.0.*",
     "lazyloadxt": "1.0.*",
-    "swipebox": "1.2.*"
+    "swipebox": "1.2.*",
+    "trumbowyg": "2.0.0-beta.3"
   }
 }
