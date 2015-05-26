@@ -801,10 +801,15 @@ h2 {
 	color: #2193CC;
 }
 
-.paginate, .comment-link {
+.paginate, .comment-link, .impression-previous-link, .impression-next-link {
 	color: #000;
 }
 
-.paginate:hover, .comment-link:hover {
+.paginate:hover, .comment-link:hover, .impression-previous-link:hover, .impression-next-link:hover {
 	color: #2193CC;
+}
+
+.impression-family * {
+	font-family:'Cookie', sans-serif !important;
+	font-size:27px;
 }

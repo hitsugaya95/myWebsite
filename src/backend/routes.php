@@ -203,3 +203,6 @@ $app->get('/admin/blog/impressions/modify/{impressionId}/', 'Admin\Controller\Bl
 
 $app->get('/admin/blog/impressions/delete/{impressionId}/', 'Admin\Controller\BlogController::deleteImpressionsAction')
     ->bind('admin-blog-delete-impressions');
+
+$app->get('/admin/blog/impressions/preview/{impressionId}/', 'Admin\Controller\BlogController::previewImpressionAction')
+    ->bind('admin-blog-preview-impression');

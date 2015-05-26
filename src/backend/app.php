@@ -57,6 +57,10 @@ $app['repository.anecdote'] = $app->share(function ($app) {
     return new Admin\Repository\AnecdoteRepository($app);
 });
 
+$app['repository.impression'] = $app->share(function ($app) {
+    return new Admin\Repository\ImpressionRepository($app);
+});
+
 $app['service.googlemaps'] = $app->share(function () {
     return new Service\GoogleMaps();
 });

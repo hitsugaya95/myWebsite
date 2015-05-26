@@ -142,16 +142,97 @@ class BlogController
 
     public function impressionsAction(Request $request, Application $app)
     {      
-        // $actualPage = null !== $request->get('page') ? $request->get('page') : 1;
-        // $maxPage = $app['repository.anecdote']->getAnecdotesMaxPage();
-        // $anecdotes = $app['repository.anecdote']->getAnecdotes(false, $actualPage);
-
-        $impressions = null;
+        $actualPage = null !== $request->get('page') ? $request->get('page') : 1;
+        $maxPage = $app['repository.impression']->getImpressionsMaxPage();
+        $impressions = $app['repository.impression']->getImpressions(false, $actualPage);
 
         return $app['twig']->render('admin/blog/impressions.html', array(
             'impressions'     => $impressions,
-            // 'actualPage' => $actualPage,
-            // 'maxPage'   => $maxPage
+            'actualPage' => $actualPage,
+            'maxPage'   => $maxPage
         ));
     }
+
+    public function addImpressionsAction(Request $request, Application $app)
+    {
+        if (0 < count($request->getQueryString())) {
+            // Add quote in database
+            $params = array(
+                "author"      => $request->get('author'),
+                "date"        => new \DateTime(str_replace('/', '-', $request->get('date'))),
+                "city"        => $request->get('city'),
+                "image"       => $request->get('image'),
+                "title"       => $request->get('title'),
+                "description" => $request->get('description'),
+                "impression"  => $request->get('impression'),
+                "isEnabled"   => null !== $request->get('isEnabled') ? true : false,
+            );
+
+            $result = $app['repository.impression']->add($params);
+
+            return (true == $result) ? $app->json($result, 200) : $app->json($result, 500);
+        }
+
+        return $app['twig']->render('/admin/blog/add_impressions.html', array());
+    }
+
+    public function modifyImpressionAction($impressionId, Request $request, Application $app)
+    {
+        if (0 < count($request->getQueryString())) {
+            // Add quote in database
+            $params = array(
+                "author"      => $request->get('author'),
+                "date"        => new \DateTime(str_replace('/', '-', $request->get('date'))),
+                "city"        => $request->get('city'),
+                "image"       => $request->get('image'),
+                "title"       => $request->get('title'),
+                "description" => $request->get('description'),
+                "impression"  => $request->get('impression'),
+                "isEnabled"   => null !== $request->get('isEnabled') ? true : false,
+            );
+
+            $result = $app['repository.impression']->modify($impressionId, $params);
+
+            return (true == $result) ? $app->json($result, 200) : $app->json($result, 500);
+        }
+
+        return $app['twig']->render('/admin/blog/modify_impressions.html', array(
+            "impression" => $app['repository.impression']->getImpression($impressionId),
+        ));
+    }
+
+    public function deleteImpressionsAction($impressionId, Request $request, Application $app)
+    {
+        $app['repository.impression']->delete($impressionId);
+
+        return $app->redirect('/admin/blog/impressions/');
+    }
+
+    public function previewImpressionAction($impressionId, Request $request, Application $app)
+    {      
+        $impression = $app['repository.impression']->getImpression($impressionId);
+
+        $month = [
+        'January' => 'Janvier',
+        'February' => 'Février',
+        'March' => 'Mars',
+        'April' => 'Avril',
+        'May' => 'Mai',
+        'June' => 'Juin',
+        'July' => 'Juillet',
+        'August' => 'Aout',
+        'September' => 'Septembre',
+        'October' => 'Octobre',
+        'November' => 'Novembre',
+        'December' => 'Décembre',
+        ];
+
+        $date = new \Datetime($impression['date']);
+        $impression['date_formatted'] = $date->format('d'). ' '.$month[$date->format('F')].' '.$date->format('Y');
+        
+        return $app['twig']->render('/admin/blog/preview_impression.html', array(
+            "impression" => $impression,
+        ));
+    }
+
 }

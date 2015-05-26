@@ -31,36 +31,49 @@
 <div class="row">
 
   <div class="twelve columns" style="margin-top:30px">
+    {% if impressions is not empty %}
 
-  	<div class="row" style="border:1px solid #fff">
-  		<div class="three columns">
-  			<img alt="alice" src="http://farm3.staticflickr.com/2833/9560678322_62cee2dbbe_n.jpg">
-  			<p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">26 avril 2015 à Paris <br />
-  			0 commentaire(s)</p>
-  		</div>
-  		<div class="nine columns">
-  			<p><a class="impression-title" href="/blog/impressions/1/" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">Les chinois de Pékin</a></p>
-    		<p style="font-family:'Cookie', sans-serif !important;font-style:italic; font-size:25px">"Les blancs sont vues différemment en Chine"</p>
-  		</div>
-  	</div>
+      {% for impression in impressions %}
+        <div class="row" style="border:1px solid #fff">
+          <div class="three columns">
+            <img alt="{{ impression.title }}" src="{{ impression.image }}">
+            <p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">{{ impression.date_formatted }} à {{ impression.city }} <br />
+            0 commentaire(s)</p>
+          </div>
+          <div class="nine columns">
+            <p><a class="impression-title" href="/blog/impressions/{{ impression.id }}/" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">{{ impression.title }}</a></p>
+            <p style="font-family:'Cookie', sans-serif !important;font-style:italic; font-size:25px">"{{ impression.description }}"</p>
+          </div>
+        </div>
 
-  	<div class="row">
-			<div class="centered nine columns">
-				<hr></hr>
-			</div>
-		</div>
+        {% if loop.last != true %}
+          <div class="row">
+            <div class="centered nine columns">
+              <hr></hr>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
 
-  	<div class="row" style="border:1px solid #fff">
-  		<div class="three columns">
-  			<img alt="alice" src="http://farm3.staticflickr.com/2844/9454835259_c2abf11a75_n.jpg">
-  			<p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">26 avril 2015 à LA <br />
-  			0 commentaire(s)</p>
-  		</div>
-  		<div class="nine columns">
-  			<p><a class="impression-title" href="#" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">Le sable de LA</a></p>
-    		<p style="font-family:'Cookie', sans-serif !important;font-style:italic; font-size:25px">"Coquillage et crustacées"</p>
-  		</div>
-  	</div>
+      <!-- Pagination -->
+      <div class="row">
+        <div class="centered ten columns">
+          {% if actualPage != 1 %}
+            <a href="/blog/impressions/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+          {% endif %}
+
+          {% if maxPage != actualPage %}
+            <a href="/blog/impressions/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <div class="row">
+        <div class="twelve columns" style="text-align:center">
+          <h5>Aucune impression n'a été ajoutée.</h5>
+        </div>
+      </div>
+    {% endif %}
 
   </div>
 

@@ -141,5 +141,44 @@
 	    })
 	});
 
+	// add impression
+	$(document).on('click', '#add-impression', function(e){
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/impressions/add/",
+	        data: $("#form-add-impression").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(html) {
+	    	alert("L'impression a bien été ajouté")
+	        $(location).attr('href', "/admin/blog/impressions/");
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
+	    })
+	});
+
+	// modify impression
+	$(document).on('click', '#modify-impression', function(e){
+		id = $(this).attr('data-id');
+		$.ajax({
+	        type: "GET",
+	        url: "/admin/blog/impressions/modify/"+id+"/",
+	        data: $("#form-modify-impression").serialize(),
+	        dataType: 'json'
+	    })
+	    .done(function(html) {
+	    	alert("L'impression a bien été modifié")
+	        $(location).attr('href', "/admin/blog/impressions/");
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+
+	        return false;
+	    })
+	});
+
 })();
 

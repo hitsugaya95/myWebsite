@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Preview impression</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+    <link href="/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="/css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/sass/gumby.css" rel="stylesheet" type="text/css">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    
+
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" /><![endif]-->
+
+   	<script src="/js/jquery.min.js" type="text/javascript"></script>
+   	<script src="/js/modernizr.js" type="text/javascript"></script>
+   	<script gumby-touch="/js" src="/js/gumby.min.js" type="text/javascript"></script>
+   	<script src="/js/gumby.images.js" type="text/javascript"></script>
+   	<script src="/js/jquery.swipebox.min.js" type="text/javascript"></script>
+   	<script src="/js/jquery.lazyloadxt.min.js" type="text/javascript"></script>
+   	<script src="/js/main.js" type="text/javascript"></script>
+   	<meta name="description" content="Bienvenue sur mon blog" />
+  </head>
+
+  <body>
+  	<div class="row" style="text-align:center">
+  		<div class="small default btn">
+			  <a href="/admin/blog/impressions/">Retour</a>
+			</div>
+  	</div>
+		<div class="row">
+		  <div class="centered nine columns" style="margin-top:30px">
+	  	<h1 style="font-family:'Cookie', sans-serif !important;font-size: 60px;text-align:center;">{{ impression.title }}</h1>
+
+	  	<legend style="font-family:'Cookie', sans-serif !important;font-size:27px;text-align:center;">"{{ impression.description }}"</legend>
+
+	  	<br/>
+	  	
+	  	<div class="impression-family">
+	  		{{ impression.impression|raw }}
+	  	</div>
+
+			<p style="font-family:'Cookie', sans-serif !important; font-size: 22px; color: #2193CC;">par {{ impression.author }}, le {{ impression.date_formatted }} à {{ impression.city }}</p>
+		</div>
+	</body>
+</html>

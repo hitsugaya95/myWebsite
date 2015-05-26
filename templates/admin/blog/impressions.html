@@ -1,0 +1,67 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Impressions{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Liste des impressions <small><a href="/admin/blog/impressions/add/">Créer</a></small></h2>
+  		<hr/>
+		</div>
+
+		{% if impressions is not empty %}
+	  	<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Publié</th>
+						<th>Auteur</th>
+						<th>Date</th>
+						<th>Ville</th>
+						<th>Image</th>
+						<th>Titre</th>
+						<th>Description</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for impression in impressions %}
+						<tr>
+							<td>{{ impression.id }}</td>
+							<td style="background-color:{% if impression.is_enabled == true %}green{% else %}red{% endif %}"></td>
+							<td>{{ impression.author }}</td>
+							<td>{{ impression.date|date("d/m/Y") }}</td>
+							<td>{{ impression.city }}</td>
+							<td><img src="{{ impression.image }}" width="160" height="111"></td>
+							<td>{{ impression.title }}</td>
+							<td>{{ impression.description }}</td>
+							<td>
+								<div class="small primary btn">
+								  <a href="/admin/blog/impressions/modify/{{ impression.id }}/">Modifier</a>
+								</div>
+								<div class="small warning btn">
+								  <a href="/admin/blog/impressions/preview/{{ impression.id }}/">Preview</a>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<!-- Pagination -->
+	    <div class="centered ten columns">
+	      {% if actualPage != 1 %}
+	        <a href="/admin/blog/impressions/?page={{ actualPage - 1 }}" class="paginate"><i class="icon-left-thin"></i>Précédent</a>
+	      {% endif %}
+
+	      {% if maxPage != actualPage %}
+	        <a href="/admin/blog/impressions/?page={{ actualPage + 1 }}" style="float:right" class="paginate">Suivant<i class="icon-right-thin"></i></a>
+	      {% endif %}
+	    </div>
+
+		{% else %}
+			<h4 class="text-center">Aucune impressions ajoutée</h4>
+		{% endif %}
+	</div>
+
+{% endblock %}

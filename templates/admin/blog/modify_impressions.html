@@ -1,0 +1,82 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Modification - impression{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Modifier l'impression {{ impression.id }} <small><a href="/admin/blog/impressions/delete/{{ impression.id }}/">Supprimer</a></small></h2>
+  		<hr/>
+		</div>
+
+  	<div class="centered ten columns">
+  		<form action="/admin/blog/impressions/modify/{{ impression.id }}/" method="GET" id="form-modify-impression">
+				<fieldset>
+					<legend>Informations</legend>
+					<ul>
+						<div class="row">
+							<div class="twelve columns">
+								<li class="field" style="text-align:center">
+									<label for="author">Auteur</label>
+									<input class="normal text input" name="author" id="author" type="text" placeholder="Alice" value="{{ impression.author }}" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="date">Date</label>
+									<input class="normal text input" name="date" id="date" type="text" placeholder="jj/mm/yyyy" value="{{ impression.date|date('d/m/Y') }}" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="city">Ville</label>
+									<input class="normal text input" name="city" id="city" type="text" placeholder="Paris" value="{{ impression.city }}" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="image">Image mise en avant <small>(Changer la lettre b en n) <a href="https://www.flickr.com/photos/132622071@N06" target="_blank">rechercher</a></small></label>
+									<input class="text input" name="image" id="image" type="text" placeholder="https://farm6.staticflickr.com/5338/17870034565_d647d65652_n.jpg" value="{{ impression.image }}" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="title">Titre</label>
+									<input class="wide text input" name="title" id="title" type="text" placeholder="Titre de l'impression" value="{{ impression.title }}" />
+								</li>
+								<li class="field" style="text-align:center">
+									<label for="description">Description</label>
+									<textarea name="description" id="description" class="wide input textarea" rows="3" cols="10" placeholder="Description de l'impression">{{ impression.description }}</textarea>
+								</li>
+								<li class="field">
+									<label for="impression" style="text-align:center">Impression</label>
+									<textarea style="float:left" name="impression" id="impression" class="wide input textarea wysiwyg" rows="6" cols="10" placeholder="The world is yours">{{ impression.impression|raw }}</textarea>
+								</li>
+								<li class="field" style="text-align:center">
+								  <label class="checkbox" for="check1">
+								    <input name="isEnabled" value="1" type="checkbox" {% if impression.is_enabled == true %} checked {% endif %}>
+								    <span></span> Publier
+								  </label>
+								</li>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<li class="field" style="text-align:center">
+								<div class="medium success btn icon-left entypo icon-tools"><a id="modify-impression" data-id="{{ impression.id }}">Modifier</a></div>
+							  <div class="medium default btn icon-right entypo icon-reply"><a href="/admin/blog/impressions/">Retour</a></div>
+							</li>
+						</div>
+					</ul>
+				</fieldset>
+			</form>
+  	</div>
+
+	</div>
+
+	<script type="text/javascript">
+		$('.wysiwyg').trumbowyg({
+	    lang: 'fr',
+	    autogrow: false,
+	    btns: ['viewHTML',
+      '|', 'btnGrp-design',
+      '|', 'link',
+      '|', 'insertImage',
+      '|', 'btnGrp-justify',
+      '|', 'btnGrp-lists']
+		});
+	</script>
+{% endblock %}
