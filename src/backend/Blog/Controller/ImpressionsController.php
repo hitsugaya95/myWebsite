@@ -31,6 +31,7 @@ class ImpressionsController
         foreach ($impressions as &$impression) {
         	$date = new \Datetime($impression['date']);
         	$impression['date_formatted'] = $date->format('d'). ' '.$this->month[$date->format('F')].' '.$date->format('Y');
+        	$impression['comments'] = $app['repository.impression']->getCommentsByImpression($impression['id'], true);
         }
 
 		return $app['twig']->render('blog/impressions.html', array(
@@ -58,10 +59,34 @@ class ImpressionsController
     	$date = new \Datetime($impression['date']);
         $impression['date_formatted'] = $date->format('d'). ' '.$this->month[$date->format('F')].' '.$date->format('Y');
 
+       	$comments = $app['repository.impression']->getCommentsByImpression($impressionId, true);
+
 		return $app['twig']->render('blog/impression.html', array(
 			'impression'         => $impression,
 			'previousImpression' => $previousImpression,
-			'nextImpression'     => $nextImpression
+			'nextImpression'     => $nextImpression,
+			'comments'           => $comments,
 		));
+    }
+
+    public function addCommentAction($impressionId, Request $request, Application $app)
+    {
+    	if (null !== $request->get('name')) {
+            // Add quote in database
+            $params = array(
+                "name"        => $request->get('name'),
+                "date"        => new \DateTime('now'),
+                "email"       => $request->get('email'),
+                "comment"     => $request->get('comment'),
+                "isNew"       => true,
+                "isPublished" => false,
+            );
+
+            $result = $app['repository.impression']->addComment((int) $impressionId, $params);
+
+            return (true == $result) ? $app->json($result, 200) : $app->json($result, 500);
+        }
+
+        return $app->abort(404, "Error this page does not exist.");
     }
 }

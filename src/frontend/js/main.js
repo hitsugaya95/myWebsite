@@ -181,5 +181,29 @@
 
 	}
 
+	// add comment
+	$(document).on('click', '#add-comment', function(e){
+		id = $(this).attr('data-id');
+		$.ajax({
+	        type: "POST",
+	        url: "/index_dev.php/blog/impressions/add-comment/"+id+"/",
+	        data: $("#form-add-comment").serialize(),
+	        dataType: 'json',
+	        beforeSend: function() { 
+	        	$("#comment-loader").removeClass('loader-hidden')
+	        }
+	    })
+	    .done(function(html) {
+	    	$("#comment-loader").addClass('loader-hidden')
+	    	alert("Votre commentaire a bien été ajouté et est en attente de validation.")
+			$('.modal .close').trigger('gumby.trigger');
+	    })
+	    .fail(function(error) {
+	    	$("#comment-loader").addClass('loader-hidden')
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+	        $('.modal .close').trigger('gumby.trigger');
+	    })
+	});
+
 })();
 

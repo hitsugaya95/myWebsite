@@ -38,7 +38,7 @@
           <div class="three columns">
             <img alt="{{ impression.title }}" src="{{ impression.image }}">
             <p style="font-family:'Arial', sans-serif !important; text-align:center;font-size: 13px;">{{ impression.date_formatted }} à {{ impression.city }} <br />
-            0 commentaire(s)</p>
+            {{ impression.comments|length }} commentaire(s)</p>
           </div>
           <div class="nine columns">
             <p><a class="impression-title" href="/blog/impressions/{{ impression.id }}/" style="font-family:'Cookie', sans-serif !important;font-size: 40px;">{{ impression.title }}</a></p>

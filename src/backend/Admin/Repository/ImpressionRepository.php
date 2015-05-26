@@ -241,4 +241,157 @@ _SQL;
 
         return $statement->execute();
 	}
+
+	/**
+	 * Add comment
+	 *
+	 * @param integer $impressionId
+	 * @param array $params
+	 *
+	 * @return bool
+	 */
+	public function addComment($impressionId, $params)
+	{
+		$sql = 
+<<<_SQL
+INSERT INTO comment (`impression_id`, `name`, `date`, `email`, `comment`, `is_new`, `is_published`)
+VALUES (:impressionId, :name, :date, :email, :comment, :isNew, :isPublished)
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);
+		$statement->bindValue(':impressionId', $impressionId, \PDO::PARAM_INT);
+		$statement->bindValue(':name', $params['name'], \PDO::PARAM_STR);
+		$statement->bindValue(':date', $params['date']->format('Y-m-d H:i:s'), \PDO::PARAM_STR);
+		$statement->bindValue(':email', $params['email'], \PDO::PARAM_STR);
+		$statement->bindValue(':comment', $params['comment'], \PDO::PARAM_STR);
+		$statement->bindValue(':isNew', $params['isNew'], \PDO::PARAM_INT);
+		$statement->bindValue(':isPublished', $params['isPublished'], \PDO::PARAM_INT);
+
+        return $statement->execute();
+	}
+
+	/**
+	 * Retrieve comments by impression
+	 *
+	 * @param integer $impressionId
+	 * @param boolean $onlyPublished
+	 *
+	 * @return array
+	 */
+	public function getCommentsByImpression($impressionId, $onlyPublished=false)
+	{
+		$sql = 
+<<<_SQL
+SELECT *
+FROM comment
+WHERE impression_id = :impressionId
+_SQL;
+		
+		if (true === $onlyPublished) {
+			$sql .= 
+<<<_SQL
+
+AND is_published = 1
+_SQL;
+		}
+
+		$sql .= 
+<<<_SQL
+
+ORDER BY id DESC
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);
+		$statement->bindValue(':impressionId', $impressionId, \PDO::PARAM_INT); 
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * Retrieve new comments that are not viewed
+	 *
+	 * @return array
+	 */
+	public function getNewComments()
+	{
+		$sql = 
+<<<_SQL
+SELECT comment.id, comment.name, comment.email, comment.date, comment.comment, impression.title as impression_title
+FROM comment as comment
+LEFT JOIN impression as impression ON impression.id = comment.impression_id
+WHERE is_new = 1
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);    
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * Set false to is_new field
+	 *
+	 * @param integer $commentId
+	 *
+	 * @return array
+	 */
+	public function viewComment($commentId)
+	{
+		$sql = 
+<<<_SQL
+UPDATE comment 
+SET `is_new` = 0
+WHERE `id` = :commentId
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);  
+		$statement->bindValue(':commentId', $commentId, \PDO::PARAM_INT);  
+        
+        return $statement->execute();
+	}
+
+	/**
+	 * Publish comment
+	 *
+	 * @param integer $commentId
+	 *
+	 * @return array
+	 */
+	public function publishComment($commentId)
+	{
+		$sql = 
+<<<_SQL
+UPDATE comment 
+SET `is_published` = 1
+WHERE `id` = :commentId
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);  
+		$statement->bindValue(':commentId', $commentId, \PDO::PARAM_INT);  
+        
+        return $statement->execute();
+	}
+
+	/**
+	 * Unpublish comment
+	 *
+	 * @param integer $commentId
+	 *
+	 * @return array
+	 */
+	public function unpublishComment($commentId)
+	{
+		$sql = 
+<<<_SQL
+UPDATE comment 
+SET `is_published` = 0
+WHERE `id` = :commentId
+_SQL;
+
+		$statement = $this->getConn()->prepare($sql);  
+		$statement->bindValue(':commentId', $commentId, \PDO::PARAM_INT);  
+        
+        return $statement->execute();
+	}
 }

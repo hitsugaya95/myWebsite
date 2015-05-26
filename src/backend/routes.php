@@ -49,10 +49,13 @@ $app->get('/blog/anecdotes/', 'Blog\Controller\AnecdotesController::indexAction'
 
 // Impressions
 $app->get('/blog/impressions/', 'Blog\Controller\ImpressionsController::indexAction')
-    ->bind('blog-impression');
+    ->bind('blog-impressions');
 
 // Impression
 $app->get('/blog/impressions/{impressionId}/', 'Blog\Controller\ImpressionsController::impressionAction');
+
+// Add Comment
+$app->post('/blog/impressions/add-comment/{impressionId}/', 'Blog\Controller\ImpressionsController::addCommentAction');
 
 /*********
 **********
@@ -206,3 +209,16 @@ $app->get('/admin/blog/impressions/delete/{impressionId}/', 'Admin\Controller\Bl
 
 $app->get('/admin/blog/impressions/preview/{impressionId}/', 'Admin\Controller\BlogController::previewImpressionAction')
     ->bind('admin-blog-preview-impression');
+
+$app->get('/admin/blog/impressions/comments/{impressionId}/', 'Admin\Controller\BlogController::commentsImpressionAction')
+    ->bind('admin-blog-comments-impression');
+
+// Comments
+$app->get('/admin/blog/impressions/new-comments/', 'Admin\Controller\BlogController::newCommentsAction')
+    ->bind('admin-blog-new-comments');
+
+$app->get('/admin/blog/impressions/published-comment/{commentId}/', 'Admin\Controller\BlogController::publishedCommentAction')
+    ->bind('admin-blog-published-comment');
+
+$app->get('/admin/blog/impressions/unpublished-comment/{commentId}/', 'Admin\Controller\BlogController::unpublishedCommentAction')
+    ->bind('admin-blog-unpublished-comment');

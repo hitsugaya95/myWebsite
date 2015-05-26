@@ -38,7 +38,12 @@
 <div class="row" style="margin-bottom: 20px;">
   <div class="push_six six columns">
     <div style="border: 6px solid #00FFCC; padding: 20px; height:315px; max-height:315px">
-      <p>Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions Impressions</p>
+      {% if impression != false %}
+        <h5><a class="impression-link" href="/blog/impressions/{{ impression.id }}/">{{ impression.date|date('d/m/y') }} - {{ impression.title |slice(0, 45) }}</a></h5>
+        <p>{{ impression.impression|striptags|slice(0, 600) }}</p>
+      {% else %}
+        <h5>Aucune impression</h5>
+      {% endif %}
     </div>
     
   </div>
@@ -46,14 +51,22 @@
   <div class="pull_six six columns">
     <div class="row" style="margin-bottom: 20px;">
       <div class="twelve columns" style="border: 6px solid #00FFCC; padding: 20px; height:135px; max-height:135px">
-        <h5>{{ quote.date|date('d/m/y') }} - {{ quote.city }} - {{ quote.country }}</h5>
-        <p style="font-family:'Arial', sans-serif !important;">"{{ quote.quote }}" - by {{ quote.author }}</p>
+        {% if quote != false %}
+          <h5>{{ quote.date|date('d/m/y') }} - {{ quote.city }} - {{ quote.country }}</h5>
+          <p style="font-family:'Arial', sans-serif !important;">"{{ quote.quote }}" - by {{ quote.author }}</p>
+        {% else %}
+          <h5>Aucune phrase</h5>
+        {% endif %} 
       </div>
     </div>
     <div class="row">
       <div class="twelve columns" style="border: 6px solid #00FFCC; padding: 20px; height:160px; max-height:160px">
-        <h5>{{ anecdote.date|date('d/m/y') }}</h5>
-        <p style="font-family:'Arial', sans-serif !important;">"{{ anecdote.anecdote|raw }}"</p>
+        {% if anecdote != false %}
+          <h5>{{ anecdote.date|date('d/m/y') }}</h5>
+          <p style="font-family:'Arial', sans-serif !important;">"{{ anecdote.anecdote|raw }}"</p>
+        {% else %}
+          <h5>Aucune anecdote</h5>
+        {% endif %} 
       </div>
     </div>
   </div>

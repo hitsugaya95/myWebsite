@@ -7,9 +7,11 @@
 	  <div class="centered twelve columns">
 	    <p>Bienvenue <strong>{{ app.user }}</strong> sur la page d'administration</p>
 
-	    <p>Nombre de collections : {{ collections}}</p>
-	    <p>Nombre d'albums : {{ albums}}</p>
-	    <p>Nombre de photos : {{ photos}}</p>
+	    <p>Nombre de collections : {{ collections }}</p>
+	    <p>Nombre d'albums : {{ albums }}</p>
+	    <p>Nombre de photos : {{ photos }}</p>
+
+	    <p>Nouveaux commentaires : <span class="danger badge">{{ comments }}</span> <a href="/admin/blog/impressions/new-comments/">Voir</a></p>
 	  </div>
 	</div>
 {% endblock %}

@@ -1,0 +1,52 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}Nouveaux commentaires{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Liste des nouveaux commentaires</h2>
+  		<hr/>
+		</div>
+
+		{% if comments is not empty %}
+	  	<table>
+				<thead>
+					<tr>
+						<th>Titre de l'impression</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Date</th>
+						<th>Commentaire</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for comment in comments %}
+						<tr id="comment-{{ comment.id }}" >
+							<td>{{ comment.impression_title }}</td>
+							<td>{{ comment.name }}</td>
+							<td>{{ comment.email }}</td>
+							<td>{{ comment.date|date("d/m/Y à H:i:s") }}</td>
+							<td>{{ comment.comment }}</td>
+							<td>
+								<div class="small success btn">
+								  <a id="publish-comment" data-id="{{ comment.id }}" >Publier</a>
+								  <div id="comment-loader-{{ comment.id }}" class="spinner loader-hidden">
+									  <div class="bounce1"></div>
+									  <div class="bounce2"></div>
+									  <div class="bounce3"></div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		{% else %}
+			<h4 class="text-center">Pas de nouveaux commentaires.</h4>
+		{% endif %}
+	</div>
+
+{% endblock %}

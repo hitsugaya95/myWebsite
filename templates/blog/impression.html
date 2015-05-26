@@ -68,34 +68,32 @@
 	</div>
 
 	<div class="centered nine columns">
-  	<h4 style="text-align:center;">2 commentaire(s)</h4>
+  	<h4 style="text-align:center;">{{ comments|length }} commentaire(s)</h4>
 
-  	<div class="row">
-			<div class="centered four columns">
-				<hr></hr>
+  	{% if comments is not empty %}
+  		<div class="row">
+				<div class="centered four columns">
+					<hr></hr>
+				</div>
 			</div>
-		</div>
+  		{% for comment in comments %}
+				<div class="row">
+					<div class="centered nine columns" style="text-align:center;">
+						<p>{{ comment.name }} - {{ comment.date|date('d/m/Y à H:i:s') }}</p>
+						<p style="text-align:justify">{{ comment.comment }}</p>
+					</div>
+				</div>
 
-		<div class="row">
-			<div class="centered nine columns" style="text-align:center;">
-				<p>NOM - DATE</p>
-				<p>Commentaire</p>
-			</div>
-		</div>
+				{% if loop.last != true %}
+		      <div class="row">
+		        <div class="centered four columns">
+		          <hr></hr>
+		        </div>
+		      </div>
+		    {% endif %}
+			{% endfor %}
 
-		<div class="row">
-			<div class="centered four columns">
-				<hr></hr>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="centered nine columns" style="text-align:center;">
-				<p>NOM - DATE</p>
-				<p>Commentaire</p>
-			</div>
-		</div>
-
+		{% endif %}	
 		<div class="row">
 			<div class="centered four columns">
 				<hr></hr>
@@ -112,23 +110,27 @@
 	      <div class="ten columns centered text-center">
 	        <h2>Écrire un commentaire</h2>
 	        <hr/>
-	        <form action="/admin/blog/quotes/giphy-search/" method="GET">
+	        <form method="POST" id="form-add-comment">
 	        	<ul>
 		        	<li class="field">
-						    <input class="input normal" name="name" type="text" placeholder="Nom" />
+						    <input class="input normal" name="name" id="name" type="text" placeholder="Nom" />
 						  </li>
 						  <li class="prepend field">
 						  	<span class="adjoined">@</span>
-						    <input class="input normal email" name="email" type="text" placeholder="Email" />
+						    <input class="input normal email" name="email" id="email" type="text" placeholder="Email" />
 						  </li>
 						  <li class="field">
-						  	<textarea class="input textarea" name="comment" placeholder="Votre commentaire"></textarea>
+						  	<textarea class="input textarea" name="comment" id="comment" placeholder="Votre commentaire"></textarea>
 						  </li>
 						</ul>
 	        </form>
-	        <div id="giphy-gif"></div>
 	        <p class="btn success medium">
-	        	<a href="#">Ajouter</a>
+	        	<a id="add-comment" data-id="{{ impression.id }}">Ajouter</a>
+	        	<div id="comment-loader" class="spinner loader-hidden">
+						  <div class="bounce1"></div>
+						  <div class="bounce2"></div>
+						  <div class="bounce3"></div>
+						</div>
 	        </p>
 	      </div>
 	    </div>

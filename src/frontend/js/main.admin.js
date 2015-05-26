@@ -73,7 +73,7 @@
 	    })
 	    .done(function(html) {
 	    	alert('La phrase a bien été ajouté')
-	        $(location).attr('href', "/admin/blog/quotes/");
+	        $(location).attr('href', "/admin/blog/quotes/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
@@ -84,7 +84,7 @@
 
 	// modify quote
 	$(document).on('click', '#modify-quote', function(e){
-		id = $(this).attr('data-id');
+		id = $(this).attr('data-id')
 		$.ajax({
 	        type: "GET",
 	        url: "/admin/blog/quotes/modify/"+id+"/",
@@ -93,7 +93,7 @@
 	    })
 	    .done(function(html) {
 	    	alert('La phrase a bien été modifié')
-	        $(location).attr('href', "/admin/blog/quotes/");
+	        $(location).attr('href', "/admin/blog/quotes/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
@@ -112,7 +112,7 @@
 	    })
 	    .done(function(html) {
 	    	alert("L'anecdote a bien été ajouté")
-	        $(location).attr('href', "/admin/blog/anecdotes/");
+	        $(location).attr('href', "/admin/blog/anecdotes/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
@@ -123,7 +123,7 @@
 
 	// modify anecdote
 	$(document).on('click', '#modify-anecdote', function(e){
-		id = $(this).attr('data-id');
+		id = $(this).attr('data-id')
 		$.ajax({
 	        type: "GET",
 	        url: "/admin/blog/anecdotes/modify/"+id+"/",
@@ -132,7 +132,7 @@
 	    })
 	    .done(function(html) {
 	    	alert("L'anecdote a bien été modifié")
-	        $(location).attr('href', "/admin/blog/anecdotes/");
+	        $(location).attr('href', "/admin/blog/anecdotes/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
@@ -151,7 +151,7 @@
 	    })
 	    .done(function(html) {
 	    	alert("L'impression a bien été ajouté")
-	        $(location).attr('href', "/admin/blog/impressions/");
+	        $(location).attr('href', "/admin/blog/impressions/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
@@ -159,10 +159,10 @@
 	        return false;
 	    })
 	});
-
+	
 	// modify impression
 	$(document).on('click', '#modify-impression', function(e){
-		id = $(this).attr('data-id');
+		id = $(this).attr('data-id')
 		$.ajax({
 	        type: "GET",
 	        url: "/admin/blog/impressions/modify/"+id+"/",
@@ -171,11 +171,94 @@
 	    })
 	    .done(function(html) {
 	    	alert("L'impression a bien été modifié")
-	        $(location).attr('href', "/admin/blog/impressions/");
+	        $(location).attr('href', "/admin/blog/impressions/")
 	    })
 	    .fail(function(error) {
 	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
 
+	        return false;
+	    })
+	});
+
+	// publish comment in new comments
+	$(document).on('click', '#publish-comment', function(e){
+		id = $(this).attr('data-id')
+		$.ajax({
+	        type: "GET",
+	        url: "/index_dev.php/admin/blog/impressions/published-comment/"+id+"/",
+	        dataType: 'json',
+	        beforeSend: function() { 
+	        	$("#comment-loader-"+id).removeClass('loader-hidden')
+	        }
+	    })
+	    .done(function(html) {
+	    	alert("Le commentaire est maintenant afficher")
+	    	$("#comment-loader-"+id).addClass('loader-hidden')
+	        $("#comment-"+id).remove()
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+	    	$("#comment-loader-"+id).addClass('loader-hidden')
+	        return false;
+	    })
+	});
+
+	// publish comment
+	$(document).on('click', '#publish-comment-from-impression', function(e){
+		id = $(this).attr('data-id')
+		commentLoader = $("#comment-loader-"+id)
+		commentDiv = $("#comment-div-"+id)
+		$.ajax({
+	        type: "GET",
+	        url: "/index_dev.php/admin/blog/impressions/published-comment/"+id+"/",
+	        dataType: 'json',
+	        beforeSend: function() { 
+	        	commentLoader.removeClass('loader-hidden')
+	        }
+	    })
+	    .done(function(html) {
+	    	alert("Le commentaire est maintenant affiché")
+	    	commentLoader.addClass('loader-hidden')
+	    	commentDiv.parent().parent().children().eq(1).removeAttr('style')
+	    	commentDiv.parent().parent().children().eq(1).attr('style', 'background-color:green')
+	        commentDiv.empty()
+	        commentDiv.removeClass('success')
+	        commentDiv.addClass('danger')
+	        commentDiv.append('<a id="unpublish-comment" data-id="'+id+'" >Supprimer</a>')
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+	    	commentLoader.addClass('loader-hidden')
+	        return false;
+	    })
+	});
+
+	// unpublish comment
+	$(document).on('click', '#unpublish-comment', function(e){
+		id = $(this).attr('data-id')
+		commentLoader = $("#comment-loader-"+id)
+		commentDiv = $("#comment-div-"+id)
+		$.ajax({
+	        type: "GET",
+	        url: "/index_dev.php/admin/blog/impressions/unpublished-comment/"+id+"/",
+	        dataType: 'json',
+	        beforeSend: function() { 
+	        	commentLoader.removeClass('loader-hidden')
+	        }
+	    })
+	    .done(function(html) {
+	    	alert("Le commentaire est maintenant supprimé")
+	    	commentLoader.addClass('loader-hidden')
+	    	commentDiv.parent().parent().children().eq(1).removeAttr('style')
+	    	commentDiv.parent().parent().children().eq(1).attr('style', 'background-color:red')
+	        commentDiv.empty()
+	        commentDiv.removeClass('danger')
+	        commentDiv.addClass('success')
+	        commentDiv.append('<a id="publish-comment" data-id="'+id+'" >Publier</a>')
+	    })
+	    .fail(function(error) {
+	    	alert('Une erreur est survenu, Veuillez réeesayer plus tard')
+	    	commentLoader.addClass('loader-hidden')
 	        return false;
 	    })
 	});

@@ -1,0 +1,58 @@
+{% extends "/admin/layout.html" %}
+
+{% block title %}{{ impression.title }} - commentaires{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="twelve columns">
+  		<h2 class="text-center">Commentaires pour l'impression {{ impression.title }}</h2>
+  		<hr/>
+		</div>
+
+		{% if comments is not empty %}
+	  	<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Publié</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Date</th>
+						<th>Commentaire</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for comment in comments %}
+						<tr>
+							<td>{{ comment.id }}</td>
+							<td style="background-color:{% if comment.is_published == true %}green{% else %}red{% endif %}"></td>
+							<td>{{ comment.name }}</td>
+							<td>{{ comment.email }}</td>
+							<td>{{ comment.date|date("d/m/Y à H:i:s") }}</td>
+							<td>{{ comment.comment }}</td>
+							<td>
+								<div id="comment-div-{{ comment.id }}" class="small {% if comment.is_published == true %}danger{% else %}success{% endif %} btn">
+									{% if comment.is_published == true %}
+										<a id="unpublish-comment" data-id="{{ comment.id }}" >Supprimer</a>
+									{% else %}
+										<a id="publish-comment-from-impression" data-id="{{ comment.id }}" >Publier</a>
+									{% endif %}
+									<div id="comment-loader-{{ comment.id }}" class="spinner loader-hidden">
+									  <div class="bounce1"></div>
+									  <div class="bounce2"></div>
+									  <div class="bounce3"></div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		{% else %}
+			<h4 class="text-center">Pas de commentaires.</h4>
+		{% endif %}
+	</div>
+
+{% endblock %}

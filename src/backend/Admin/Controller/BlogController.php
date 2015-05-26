@@ -229,10 +229,48 @@ class BlogController
 
         $date = new \Datetime($impression['date']);
         $impression['date_formatted'] = $date->format('d'). ' '.$month[$date->format('F')].' '.$date->format('Y');
-        
+
         return $app['twig']->render('/admin/blog/preview_impression.html', array(
             "impression" => $impression,
         ));
+    }
+
+    public function commentsImpressionAction($impressionId, Request $request, Application $app)
+    {
+        $impression = $app['repository.impression']->getImpression($impressionId);
+        $comments = $app['repository.impression']->getCommentsByImpression($impressionId);
+
+        return $app['twig']->render('/admin/blog/comments.html', array(
+            "comments"   => $comments,
+            "impression" => $impression
+        ));
+    }
+
+    public function newCommentsAction(Request $request, Application $app)
+    {    
+        $comments = $app['repository.impression']->getNewComments();
+
+        foreach ($comments as $comment) {
+            $app['repository.impression']->viewComment($comment['id']);
+        } 
+
+        return $app['twig']->render('/admin/blog/new_comments.html', array(
+            "comments" => $comments,
+        ));
+    }
+
+    public function publishedCommentAction($commentId, Request $request, Application $app)
+    {    
+        $result = $app['repository.impression']->publishComment($commentId);
+
+        return (true == $result) ? $app->json($result, 200) : $app->json($result, 500);
+    }
+
+    public function unpublishedCommentAction($commentId, Request $request, Application $app)
+    {    
+        $result = $app['repository.impression']->unpublishComment($commentId);
+
+        return (true == $result) ? $app->json($result, 200) : $app->json($result, 500);
     }
 
 }
